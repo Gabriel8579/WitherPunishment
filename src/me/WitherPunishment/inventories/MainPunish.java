@@ -2220,7 +2220,7 @@ public class MainPunish implements Listener{
 		}
 		try {
 			Statement s = Main.c.createStatement();
-			ResultSet res = s.executeQuery("SELECT COUNT(*) AS total FROM punish WHERE Nome='" + punished + "' AND Sigla = '" + sigl.toUpperCase() + "';");
+			ResultSet res = s.executeQuery("SELECT COUNT(*) AS total FROM punish WHERE Nome='" + punished + "' AND Sigla = '" + sigl.toUpperCase() + "' AND CancelBy != 'Sistema';");
 			if(res.next()) {
 				int sev2 = res.getInt("total");
 				severidade = severidade + sev2;
