@@ -1594,7 +1594,7 @@ public class MainPunish implements Listener{
 					e.setCancelled(true);
 					String punished = punish.get(p.getName());
 					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("aem", punished), "ubm", "Usar intencionalmente um erro existente no mapa.");
+					openFPunish(p, punished, flagra, "jogo", getSev("ubm", punished), "ubm", "Usar intencionalmente um erro existente no mapa.");
 				}
 				if(e.getCurrentItem().isSimilar(co)) {
 					e.setCancelled(true);
