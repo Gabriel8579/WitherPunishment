@@ -1,0 +1,12 @@
+name: WitherPunishment
+version: 1.0
+author: Gabriel8579
+main: me.WitherPunishment.Main
+prefix: WitherPunish
+
+commands:
+  p:
+    aliases: punir
+    description: Punir ou editar uma punicao de um jogador.
+  punicoes:
+    description: Ver as punicoes recebidas por voce.
