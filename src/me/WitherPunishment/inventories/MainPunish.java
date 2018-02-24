@@ -1156,7 +1156,7 @@ public class MainPunish implements Listener{
 		excluir.setItemMeta(excluirm);
 		
 		inv.setItem(4, tpun);
-		if(p.hasPermission("punish.edit.cancel") && !res.getBoolean("Cancelado")) {
+		if(!res.getBoolean("Cancelado") && p.hasPermission("punish.edit.cancel")) {
 			inv.setItem(19, cpun);
 		}
 		if(p.hasPermission("punish.edit.delete")) {
