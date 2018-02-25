@@ -1351,6 +1351,9 @@ public class MainPunish implements Listener{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		if(severidade > 10) {
+			return 10;
+		}
 		return severidade;
 	}	
 	
