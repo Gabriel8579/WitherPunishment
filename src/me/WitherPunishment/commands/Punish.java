@@ -26,9 +26,9 @@ public class Punish implements CommandExecutor{
 			if(!(sender instanceof Player)) {
 				if(args.length < 2) {
 					if(Main.english) {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					} else {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					}
 					return true;
 				}
@@ -45,17 +45,17 @@ public class Punish implements CommandExecutor{
 						sender.sendMessage(ChatColor.BLUE + "Punishment Set> " + ChatColor.GOLD + "Language changed to english.");
 					} else {
 						if(Main.english) {
-							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 						} else {
-							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 						}
 						return true;
 					}
 				} else {
 					if(Main.english) {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					} else {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					}
 					return true;
 				}
@@ -63,9 +63,9 @@ public class Punish implements CommandExecutor{
 			if(sender.hasPermission("punish.command.pset")) {
 				if(args.length < 2) {
 					if(Main.english) {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					} else {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					}
 					return true;
 				}
@@ -82,17 +82,17 @@ public class Punish implements CommandExecutor{
 						sender.sendMessage(ChatColor.BLUE + "Punishment Set> " + ChatColor.GOLD + "Language changed to english.");
 					} else {
 						if(Main.english) {
-							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 						} else {
-							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+							sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 						}
 						return true;
 					}
 				} else {
 					if(Main.english) {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					} else {
-						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + "Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
 					}
 					return true;
 				}
