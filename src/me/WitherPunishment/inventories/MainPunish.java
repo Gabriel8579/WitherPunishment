@@ -108,6 +108,7 @@ public class MainPunish implements Listener{
 	public static String sigla;
 	public static String descr;
 	public static String tip;
+	public static String fla = "";
 	
 	@SuppressWarnings("deprecation")
 	public static void openPrimaryPunish(Player punisher, String punished) throws SQLException {
@@ -578,8 +579,6 @@ public class MainPunish implements Listener{
 		ResultSet res = s.executeQuery("SELECT * FROM punish WHERE id=" + id + ";");
 		Inventory inv = Bukkit.createInventory(null, 9*6, ChatColor.DARK_RED + res.getString("Sigla") + "#" + res.getInt("id"));
 		
-		
-		
 		res.next();
 		flpun = res.getBoolean("Tipo");
 		String vi = "chat";
@@ -625,10 +624,18 @@ public class MainPunish implements Listener{
 		ppunm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para anexar/editar a prova");
 		ppun.setItemMeta(ppunm);
 		
-		if(flpun) {
-			fpun = new ItemStack(Material.DISPENSER);
-		} else {
-			fpun = new ItemStack(Material.PAPER);
+		if(fla != "") {
+			if(fla.equalsIgnoreCase("Sim")) {
+				fpun = new ItemStack(Material.DISPENSER);
+			} else {
+				fpun = new ItemStack(Material.PAPER);
+			}
+		} else {	
+			if(flpun) {
+				fpun = new ItemStack(Material.DISPENSER);
+			} else {
+				fpun = new ItemStack(Material.PAPER);
+			}
 		}
 		fpunm = fpun.getItemMeta();
 		fpunm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para alternar entre o modo flagrante/denúncia");
@@ -790,13 +797,26 @@ public class MainPunish implements Listener{
 					eprova.remove(p.getName());
 					editando.remove(p.getName());
 					flpun = false;
+					fla = "";
 					p.closeInventory();
 					return;
 				}
 				if(e.getCurrentItem().isSimilar(fpun)) {
 					e.setCancelled(true);
 					p.closeInventory();
-					flpun = !flpun;
+					if(fla != "") {
+						if(fla.equalsIgnoreCase("Sim")) {
+							fla = "Não";
+						} else {
+							fla = "Sim";
+						}
+					} else {	
+						if(flpun) {
+							fla = "Não";
+						} else {
+							fla = "Sim";
+						}
+					}
 					editPunish(p, editando.get(p.getName()));
 					return;
 				}
@@ -826,14 +846,20 @@ public class MainPunish implements Listener{
 						}
 						
 					}
-					int sla = 0;
-					if(flpun) {
-						sla = 1;
+					String sla = "";
+					if(fla == "") {
+						sla = " ";
+					}
+					if(fla.equalsIgnoreCase("Sim")) {
+						sla = " Tipo = 1";
+					}
+					if(fla.equalsIgnoreCase("Não")) {
+						sla = " Tipo = 0";
 					}
 					Statement s = Main.c.createStatement();
-					s.execute("UPDATE punish SET" + prova + sev + fim + " Tipo=" + sla + " WHERE id=" + editando.get(p.getName()) + ";");
+					s.execute("UPDATE punish SET" + prova + sev + fim + sla + " WHERE id=" + editando.get(p.getName()) + ";");
 					p.sendMessage("" + ChatColor.BLUE + "Editar Punição> A punição foi editada com sucesso.");
-					
+					fla = "";
 					s.close();
 					editando.remove(p.getName());
 					return;
@@ -850,6 +876,7 @@ public class MainPunish implements Listener{
 						Player a = Bukkit.getPlayer(res.getString("Nome"));
 						a.sendMessage("" + ChatColor.BLUE + "Punição> " + ChatColor.GOLD + "Sua punição " + ChatColor.DARK_RED + "" + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + "" + getName(res.getString("Sigla")) + " " + ChatColor.GOLD + "foi cancelada por um administrador.");
 					}
+					fla = "";
 					return;
 				}
 				if(e.getCurrentItem().isSimilar(excluir)) {
@@ -978,7 +1005,6 @@ public class MainPunish implements Listener{
 					openTPunishJ(p, punished, flagra);
 					return;
 				}
-				//violações de chat
 				if(e.getCurrentItem().getType().equals(Material.NETHER_STAR) && punish.containsKey(p.getName())) {
 					e.setCancelled(true);
 					String punished = punish.get(p.getName());

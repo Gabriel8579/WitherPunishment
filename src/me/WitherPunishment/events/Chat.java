@@ -88,13 +88,12 @@ public class Chat implements Listener{
 
 	}
 	public static boolean isMuted(Player p) {
-		boolean fi = false;
 		try {
 		Statement s = Main.c.createStatement();
 		ResultSet res = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "' AND Modo=1 AND Fim > " + System.currentTimeMillis() + ";");
 		while(res.next()) {
 			if(!res.getBoolean("Cancelado")) {
-				fi = true;
+				return true;
 			}
 			s.execute("UPDATE punish SET Cancelado=1, CancelBy='Sistema' WHERE id=" + res.getInt("id") + ";");
 		}	
@@ -102,7 +101,7 @@ public class Chat implements Listener{
 		ResultSet res2 = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "' AND Modo=1 AND Fim = -1 AND Sev = 10;");
 		while(res2.next()) {
 			if(!res2.getBoolean("Cancelado")) {
-				fi = true;
+				return true;
 			}
 			s.execute("UPDATE punish SET Cancelado=1, CancelBy='Sistema' WHERE id=" + res.getInt("id") + ";");
 		}	
@@ -110,6 +109,6 @@ public class Chat implements Listener{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return fi;
+		return false;
 	}
 }
