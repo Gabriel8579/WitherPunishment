@@ -14,6 +14,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -58,74 +59,6 @@ public class MainPunish implements Listener{
 	public static ItemStack canc;
 	public static ItemMeta cancm;
 
-	//Violação de chat
-	public static ItemStack abc;
-	public static ItemMeta abcm;
-	public static ItemStack ae;
-	public static ItemMeta aem;
-	public static ItemStack as;
-	public static ItemMeta asm;
-	public static ItemStack bfc;
-	public static ItemMeta bfcm;
-	public static ItemStack ct;
-	public static ItemMeta ctm;
-	public static ItemStack dna;
-	public static ItemMeta dnam;
-	public static ItemStack fec;
-	public static ItemMeta fecm;
-	public static ItemStack fh;
-	public static ItemMeta fhm;
-	public static ItemStack fpc;
-	public static ItemMeta fpcm;
-	public static ItemStack mi;
-	public static ItemMeta mim;
-	public static ItemStack oe;
-	public static ItemMeta oem;
-	public static ItemStack oj;
-	public static ItemMeta ojm;
-	public static ItemStack os;
-	public static ItemMeta osm;
-	public static ItemStack risme;
-	public static ItemMeta rismem;
-	//violação de jogo
-	public static ItemStack abj;
-	public static ItemMeta abjm;
-	public static ItemStack aemj;
-	public static ItemMeta  aemjm;
-	public static ItemStack co;
-	public static ItemMeta com;
-	public static ItemStack fc;
-	public static ItemMeta fcm;
-	public static ItemStack gr;
-	public static ItemMeta grm;
-	public static ItemStack vreb;
-	public static ItemMeta vrebm;
-	public static ItemStack hc;
-	public static ItemMeta hcm;
-	public static ItemStack hd;
-	public static ItemMeta hdm;
-	public static ItemStack hm;
-	public static ItemMeta hmm;
-	public static ItemStack hmv;
-	public static ItemMeta hmvm;
-	public static ItemStack mna;
-	public static ItemMeta mnam;
-	public static ItemStack sh;
-	public static ItemMeta shm;
-	public static ItemStack ao;
-	public static ItemMeta aom;
-	public static ItemStack asg;
-	public static ItemMeta asgm;
-	public static ItemStack coi;
-	public static ItemMeta coim;
-	public static ItemStack fen;
-	public static ItemMeta fenm;
-	public static ItemStack pc;
-	public static ItemMeta pcm;
-	public static ItemStack pf;
-	public static ItemMeta pfm;
-	public static ItemStack soi;
-	public static ItemMeta soim;
 	//Inventario editar punição
 	public static ItemStack punicoes;
 	public static ItemMeta punicoesm;
@@ -192,8 +125,8 @@ public class MainPunish implements Listener{
 			cabeca = new ItemStack(397, 1, (short) 3);
 		    cabecam = (SkullMeta) cabeca.getItemMeta();
 		    List<String> desccab = new ArrayList<String>();
-		    desccab.add("" + ChatColor.DARK_RED + "§lPunir: " + ChatColor.RED + "Escolha o modo de punição");
-		    cabecam.setDisplayName("" + ChatColor.DARK_RED + "§lPunir: "+punished);
+		    desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Escolha o modo de punição");
+		    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
 		    cabecam.setOwner(punished);
 		    cabecam.setLore(desccab);
 		    cabeca.setItemMeta(cabecam);
@@ -201,7 +134,7 @@ public class MainPunish implements Listener{
 		    papel = new ItemStack(Material.PAPER);
 		    papelm = papel.getItemMeta();
 		    List<String> descpapel = new ArrayList<String>();
-		    descpapel.add("§bModo de Punição: " + ChatColor.YELLOW + "Denúncia");
+		    descpapel.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Denúncia");
 		    descpapel.add("");
 		    descpapel.add("" + ChatColor.GRAY + "Escolha este modo para punir");
 		    descpapel.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
@@ -215,7 +148,7 @@ public class MainPunish implements Listener{
 		    ejec = new ItemStack(Material.DISPENSER);
 		    ejecm = ejec.getItemMeta();
 		    List<String> descejec = new ArrayList<String>();
-		    descejec.add("§bModo de Punição: " + ChatColor.YELLOW + "Flagrante");
+		    descejec.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Flagrante");
 		    descejec.add("");
 		    descejec.add("" + ChatColor.GRAY + "Escolha este modo para punir");
 		    descejec.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
@@ -264,10 +197,10 @@ public class MainPunish implements Listener{
 		cabeca = new ItemStack(397, 1, (short) 3);
 	    cabecam = (SkullMeta) cabeca.getItemMeta();
 	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + "§lPUNIR: " + ChatColor.RED + "Escolha o tipo de punição");
+	    desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "PUNIR: " + ChatColor.RED + "Escolha o tipo de punição");
 	    desccab.add("");
 	    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + "" + flag);
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "§lPunir: "+punished);
+	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
 	    cabecam.setOwner(punished);
 	    cabecam.setLore(desccab);
 	    cabeca.setItemMeta(cabecam);
@@ -275,7 +208,7 @@ public class MainPunish implements Listener{
 	    livro = new ItemStack(Material.BOOK_AND_QUILL);
 	    livrom = livro.getItemMeta();
 	    List<String> descpapel = new ArrayList<String>();
-	    descpapel.add("§bTipo de Punição: " + ChatColor.YELLOW + "Violações de Chat");
+	    descpapel.add("" + ChatColor.AQUA + "Tipo de Punição: " + ChatColor.YELLOW + "Violações de Chat");
 	    descpapel.add("");
 	    descpapel.add("" + ChatColor.GRAY + "Escolha este tipo para punir");
 	    descpapel.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
@@ -289,7 +222,7 @@ public class MainPunish implements Listener{
 	    esp = new ItemStack(Material.DIAMOND_SWORD);
 	    espm = esp.getItemMeta();
 	    List<String> descejec = new ArrayList<String>();
-	    descejec.add("§bTipo de Punição: " + ChatColor.YELLOW + "Violações de Jogo");
+	    descejec.add("" + ChatColor.AQUA + "Tipo de Punição: " + ChatColor.YELLOW + "Violações de Jogo");
 	    descejec.add("");
 	    descejec.add("" + ChatColor.GRAY + "Escolha este modo para punir");
 	    descejec.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
@@ -307,517 +240,74 @@ public class MainPunish implements Listener{
 	    punisher.openInventory(inv);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void openTPunish(Player punisher, String punished, boolean inact) {
-		Inventory inv = Bukkit.createInventory(null, 9*4, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished);
 		flagra = inact;
-		String flag = "";
 		String prova = "";
 		if(inact) {
-			flag = "Flagrante";
 			prova = "poderá ser anexada posteriormente!";
 		} else {
-			flag = "Denúncia";
 			prova = "deverá ser anexada!";
 		}
-		
-		cabeca = new ItemStack(397, 1, (short) 3);
-	    cabecam = (SkullMeta) cabeca.getItemMeta();
-	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + "§lPUNIR: " + ChatColor.RED + "Escolha a violação");
-	    desccab.add("");
-	    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + "" + flag);
-	    desccab.add("" + ChatColor.WHITE + "Tipo de punição: " + ChatColor.YELLOW + "Violação de chat");
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "§lPunir: "+punished);
-	    cabecam.setOwner(punished);
-	    cabecam.setLore(desccab);
-	    cabeca.setItemMeta(cabecam);
-	    
-	    abc = new ItemStack(Material.BOOK_AND_QUILL);
-	    abcm = abc.getItemMeta();
-	    List<String> descabc = new ArrayList<String>();
-	    descabc.add("§bDescrição");
-	    descabc.add("");
-	    descabc.add("" + ChatColor.GRAY + "Usar intencionalmente um erro");
-	    descabc.add("" + ChatColor.GRAY + "existente no sistema de chat.");
-	    descabc.add("");
-	    descabc.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    abcm.setLore(descabc);
-	    abcm.setDisplayName("" + ChatColor.DARK_GRAY + "UBC - Uso de Bug de Chat");
-	    abc.setItemMeta(abcm);
-	    
-	    ae = new ItemStack(Material.BOOK_AND_QUILL);
-	    aem = ae.getItemMeta();
-	    List<String> descae = new ArrayList<String>();
-	    descae.add("§bDescrição");
-	    descae.add("");
-	    descae.add("" + ChatColor.GRAY + "Discutir persistentemente");
-	    descae.add("" + ChatColor.GRAY + "sobre ações de um membro da equipe.");
-	    descae.add("");
-	    descae.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    aem.setLore(descae);
-	    aem.setDisplayName("" + ChatColor.DARK_GRAY + "PAE - Persistir Discussão com Membro da Equipe");
-	    ae.setItemMeta(aem);
-	    
-	    as = new ItemStack(Material.BOOK_AND_QUILL);
-	    asm = as.getItemMeta();
-	    List<String> descas = new ArrayList<String>();
-	    descas.add("§bDescrição");
-	    descas.add("");
-	    descas.add("" + ChatColor.GRAY + "Enviar mensagem sexual direcionada a um jogador.");
-	    descas.add("");
-	    descas.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    asm.setLore(descas);
-	    asm.setDisplayName("" + ChatColor.DARK_GRAY + "MSJ - Mensagem Sexual a um Jogador");
-	    as.setItemMeta(asm);
-	    
-	    bfc = new ItemStack(Material.BOOK_AND_QUILL);
-	    bfcm = bfc.getItemMeta();
-	    List<String> descbfc = new ArrayList<String>();
-	    descbfc.add("§bDescrição");
-	    descbfc.add("");
-	    descbfc.add("" + ChatColor.GRAY + "Desfigurar uma palavra protegida com o objetivo de");
-	    descbfc.add("" + ChatColor.GRAY + "ignorar a proteção do chat.");
-	    descbfc.add("");
-	    descbfc.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    bfcm.setLore(descbfc);
-	    bfcm.setDisplayName("" + ChatColor.DARK_GRAY + "IPC - Ignorar Proteção do Chat");
-	    bfc.setItemMeta(bfcm);
-	    
-	    ct = new ItemStack(Material.BOOK_AND_QUILL);
-	    ctm = ct.getItemMeta();
-	    List<String> descct = new ArrayList<String>();
-	    descct.add("§bDescrição");
-	    descct.add("");
-	    descct.add("" + ChatColor.GRAY + "Enviar mensagens fazendo jogadores executarem");
-	    descct.add("" + ChatColor.GRAY + "comandos indesejaveis intencionamente.");
-	    descct.add("");
-	    descct.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    ctm.setLore(descct);
-	    ctm.setDisplayName("" + ChatColor.DARK_GRAY + "TC- Trolar no Chat");
-	    ct.setItemMeta(ctm);
-	    
-	    dna = new ItemStack(Material.BOOK_AND_QUILL);
-	    dnam = dna.getItemMeta();
-	    List<String> descdna = new ArrayList<String>();
-	    descdna.add("§bDescrição");
-	    descdna.add("");
-	    descdna.add("" + ChatColor.GRAY + "Fazer divulgações ou anúncios");
-	    descdna.add("" + ChatColor.GRAY + "sem autorização de um administrador.");
-	    descdna.add("");
-	    descdna.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    dnam.setLore(descdna);
-	    dnam.setDisplayName("" + ChatColor.DARK_GRAY + "DVC - Divulgação");
-	    dna.setItemMeta(dnam);
-	    
-	    fec = new ItemStack(Material.BOOK_AND_QUILL);
-	    fecm = fec.getItemMeta();
-	    List<String> descfec = new ArrayList<String>();
-	    descfec.add("§bDescrição");
-	    descfec.add("");
-	    descfec.add("" + ChatColor.GRAY + "Falar no chat dizendo que faz parte da equipe");
-	    descfec.add("" + ChatColor.GRAY + "quando não faz.");
-	    descfec.add("");
-	    descfec.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    fecm.setLore(descfec);
-	    fecm.setDisplayName("" + ChatColor.DARK_GRAY + "FSE - Fingir ser da Equipe");
-	    fec.setItemMeta(fecm);
-	    
-	    fh = new ItemStack(Material.BOOK_AND_QUILL);
-	    fhm = fh.getItemMeta();
-	    List<String> descfh = new ArrayList<String>();
-	    descfh.add("§bDescrição");
-	    descfh.add("");
-	    descfh.add("" + ChatColor.GRAY + "Enviar a mesma mensagem varias vezes.");
-	    descfh.add("");
-	    descfh.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    fhm.setLore(descfh);
-	    fhm.setDisplayName("" + ChatColor.DARK_GRAY + "FLD - Flood");
-	    fh.setItemMeta(fhm);
-	    
-	    fpc = new ItemStack(Material.BOOK_AND_QUILL);
-	    fpcm = fpc.getItemMeta();
-	    List<String> descfpc = new ArrayList<String>();
-	    descfpc.add("§bDescrição");
-	    descfpc.add("");
-	    descfpc.add("" + ChatColor.GRAY + "Fazer outros jogadores violarem");
-	    descfpc.add("" + ChatColor.GRAY + "regras para serem punidos.");
-	    descfpc.add("");
-	    descfpc.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    fpcm.setLore(descfpc);
-	    fpcm.setDisplayName("" + ChatColor.DARK_GRAY + "IQR - Incentivar Quebra de Regra");
-	    fpc.setItemMeta(fpcm);
-	    
-	    mi = new ItemStack(Material.BOOK_AND_QUILL);
-	    mim = mi.getItemMeta();
-	    List<String> descmi = new ArrayList<String>();
-	    descmi.add("§bDescrição");
-	    descmi.add("");
-	    descmi.add("" + ChatColor.GRAY + "Mensagem com conotação sexual ou nojentas.");
-	    descmi.add("" + ChatColor.GRAY + "Também é aplicado quando se usa palavrões em excesso.");
-	    descmi.add("");
-	    descmi.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    mim.setLore(descmi);
-	    mim.setDisplayName("" + ChatColor.DARK_GRAY + "MA - Mensagem Abusiva");
-	    mi.setItemMeta(mim);
-	    
-	    oe = new ItemStack(Material.BOOK_AND_QUILL);
-	    oem = oe.getItemMeta();
-	    List<String> descoe = new ArrayList<String>();
-	    descoe.add("§bDescrição");
-	    descoe.add("");
-	    descoe.add("" + ChatColor.GRAY + "Ofender ou enviar mensagens abusivas a um jogador");
-	    descoe.add("" + ChatColor.GRAY + "que seja um membro da equipe.");
-	    descoe.add("");
-	    descoe.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    oem.setLore(descoe);
-	    oem.setDisplayName("" + ChatColor.DARK_GRAY + "OST - Ofensa a Staff");
-	    oe.setItemMeta(oem);
-	    
-	    oj = new ItemStack(Material.BOOK_AND_QUILL);
-	    ojm = oj.getItemMeta();
-	    List<String> descoj = new ArrayList<String>();
-	    descoj.add("§bDescrição");
-	    descoj.add("");
-	    descoj.add("" + ChatColor.GRAY + "Ofender ou enviar mensagens abusivas a um jogador comum.");
-	    descoj.add("");
-	    descoj.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    ojm.setLore(descoj);
-	    ojm.setDisplayName("" + ChatColor.DARK_GRAY + "OP - Ofensa a Player");
-	    oj.setItemMeta(ojm);
-	    
-	    os = new ItemStack(Material.BOOK_AND_QUILL);
-	    osm = os.getItemMeta();
-	    List<String> descos = new ArrayList<String>();
-	    descos.add("§bDescrição");
-	    descos.add("");
-	    descos.add("" + ChatColor.GRAY + "Ofender ou enviar mensagens abusivas ao servidor.");
-	    descos.add("");
-	    descos.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    osm.setLore(descos);
-	    osm.setDisplayName("" + ChatColor.DARK_GRAY + "OSV - Ofensa ao Servidor");
-	    os.setItemMeta(osm);
-	    
-	    risme = new ItemStack(Material.BOOK_AND_QUILL);
-	    rismem = risme.getItemMeta();
-	    List<String> descrisme = new ArrayList<String>();
-	    descrisme.add("§bDescrição");
-	    descrisme.add("");
-	    descrisme.add("" + ChatColor.GRAY + "Dizer a outro jogador que existe um staff");
-	    descrisme.add("" + ChatColor.GRAY + "disfarçado no servidor quando realmente existe um.");
-	    descrisme.add("");
-	    descrisme.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    rismem.setLore(descrisme);
-	    rismem.setDisplayName("" + ChatColor.DARK_GRAY + "RME - Revelar um Membro da Equipe");
-	    risme.setItemMeta(rismem);
-	    
-	    
-	    inv.setItem(4, cabeca);
-	    inv.setItem(11, livro);
-	    inv.setItem(15, esp);
-	    inv.setItem(10, abc);
-	    inv.setItem(11, ae);
-	    inv.setItem(12, as);
-	    inv.setItem(13, bfc);
-	    inv.setItem(14, ct);
-	    inv.setItem(15, dna);
-	    inv.setItem(16, fec);
-	    inv.setItem(19, fh);
-	    inv.setItem(20, fpc);
-	    inv.setItem(21, mi);
-	    inv.setItem(22, oe);
-	    inv.setItem(23, oj);
-	    inv.setItem(24, os);
-	    inv.setItem(25, risme);
-	    
-	    punisher.openInventory(inv);
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+		ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.chatViolations");
+		if(Main.pl.getConfig().get("punishments.chatViolations") == null) {
+			punisher.closeInventory();
+			punisher.sendMessage(ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Não foram encontradas violações de chat configuradas");
+			return;
+		}
+		for(String s : c.getKeys(false)) {
+			ItemStack chat = new ItemStack(Material.NETHER_STAR);
+			ItemMeta chatm = chat.getItemMeta();
+			List<String> descchat = new ArrayList<String>();
+			descchat.add(ChatColor.AQUA + "Descrição");
+			descchat.add("");
+			descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
+			descchat.add("");
+			descchat.add(ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
+			descchat.add("");
+			descchat.add(ChatColor.DARK_RED + "Uma prova " + prova);
+			chatm.setLore(descchat);
+			chatm.setDisplayName(ChatColor.DARK_GRAY + c.getString(s + ".stname") + " - " + c.getString(s + ".name"));
+			chat.setItemMeta(chatm);
+			items.add(chat);
+		}
+		new ScrollerInventory(items, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished, punisher);
 	}
 	
 	
-	@SuppressWarnings("deprecation")
 	public static void openTPunishJ(Player punisher, String punished, boolean inact) {
-		Inventory inv = Bukkit.createInventory(null, 9*5, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished);
-		String flag = "";
 		String prova = "";
 		if(inact) {
-			flag = "Flagrante";
 			prova = "poderá ser anexada posteriormente!";
 		} else {
-			flag = "Denúncia";
 			prova = "deverá ser anexada!";
 		}
 		
-		cabeca = new ItemStack(397, 1, (short) 3);
-	    cabecam = (SkullMeta) cabeca.getItemMeta();
-	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + "§lPUNIR: " + ChatColor.RED + "Escolha a violação");
-	    desccab.add("");
-	    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + "" + flag);
-	    desccab.add("" + ChatColor.WHITE + "Tipo de punição: " + ChatColor.YELLOW + "Violação de jogo");
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "§lPunir: "+punished);
-	    cabecam.setOwner(punished);
-	    cabecam.setLore(desccab);
-	    cabeca.setItemMeta(cabecam);
-	    
-	    abj = new ItemStack(Material.BOOK_AND_QUILL);
-	    abjm = abj.getItemMeta();
-	    List<String> descabj = new ArrayList<String>();
-	    descabj.add("§bDescrição");
-	    descabj.add("");
-	    descabj.add("" + ChatColor.GRAY + "Abusar constantemente de erro existente no jogo.");
-	    descabj.add("");
-	    descabj.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    abjm.setLore(descabj);
-	    abjm.setDisplayName("" + ChatColor.DARK_GRAY + "UBJ - Uso de Bug do Jogo");
-	    abj.setItemMeta(abjm);
-	    
-	    aemj = new ItemStack(Material.BOOK_AND_QUILL);
-	    aemjm = aemj.getItemMeta();
-	    List<String> descaemj = new ArrayList<String>();
-	    descaemj.add("§bDescrição");
-	    descaemj.add("");
-	    descaemj.add("" + ChatColor.GRAY + "Usar intencionalmente um erro existente no mapa.");
-	    descaemj.add("");
-	    descaemj.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    aemjm.setLore(descaemj);
-	    aemjm.setDisplayName("" + ChatColor.DARK_GRAY + "UBM - Uso de Bug do Mapa");
-	    aemj.setItemMeta(aemjm);
-	    
-	    co = new ItemStack(Material.BOOK_AND_QUILL);
-	    com = co.getItemMeta();
-	    List<String> descco = new ArrayList<String>();
-	    descco.add("§bDescrição");
-	    descco.add("");
-	    descco.add("" + ChatColor.GRAY + "Fazer construções ou desenhos inapropriados.");
-	    descco.add("");
-	    descco.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    com.setLore(descco);
-	    com.setDisplayName("" + ChatColor.DARK_GRAY + "CI - Construção Inapropriada");
-	    co.setItemMeta(com);
-	    
-	    fc = new ItemStack(Material.BOOK_AND_QUILL);
-	    fcm = fc.getItemMeta();
-	    List<String> descfc = new ArrayList<String>();
-	    descfc.add("§bDescrição");
-	    descfc.add("");
-	    descfc.add("" + ChatColor.GRAY + "Enviar comandos constantemente para");
-	    descfc.add("" + ChatColor.GRAY + "floodar o chat de outros jogadores ou");
-	    descfc.add("" + ChatColor.GRAY + "para causar lag no servidor.");
-	    descfc.add("");
-	    descfc.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    fcm.setLore(descfc);
-	    fcm.setDisplayName("" + ChatColor.DARK_GRAY + "SC - Spam de Comandos");
-	    fc.setItemMeta(fcm);
-	    
-	    gr = new ItemStack(Material.BOOK_AND_QUILL);
-	    grm = gr.getItemMeta();
-	    List<String> descgr = new ArrayList<String>();
-	    descgr.add("§bDescrição");
-	    descgr.add("");
-	    descgr.add("" + ChatColor.GRAY + "Prejudicar ou Destruir qualquer coisa");
-	    descgr.add("" + ChatColor.GRAY + "que não seja sua propositalmente.");
-	    descgr.add("");
-	    descgr.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    grm.setLore(descgr);
-	    grm.setDisplayName("" + ChatColor.DARK_GRAY + "GRF - Griefing");
-	    gr.setItemMeta(grm);
-	    
-	    vreb = new ItemStack(Material.BOOK_AND_QUILL);
-	    vrebm = vreb.getItemMeta();
-	    List<String> descvreb = new ArrayList<String>();
-	    descvreb.add("§bDescrição");
-	    descvreb.add("");
-	    descvreb.add("" + ChatColor.GRAY + "Fazer construções ou desenhos de mensagens");
-	    descvreb.add("" + ChatColor.GRAY + "que violam alguma regra existente.");
-	    descvreb.add("");
-	    descvreb.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    vrebm.setLore(descvreb);
-	    vrebm.setDisplayName("" + ChatColor.DARK_GRAY + "VRCC - Violar Regra de Chat em uma Construção");
-	    vreb.setItemMeta(vrebm);
-	    
-	    hc = new ItemStack(Material.BOOK_AND_QUILL);
-	    hcm = hc.getItemMeta();
-	    List<String> deschc = new ArrayList<String>();
-	    deschc.add("§bDescrição");
-	    deschc.add("");
-	    deschc.add("" + ChatColor.GRAY + "Utilizar qualquer tipo de hack ou mod que alteram o jogador em");
-	    deschc.add("" + ChatColor.GRAY + "sua forma de lutar mas que não altere a sua movimentação.");
-	    deschc.add("");
-	    deschc.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    hcm.setLore(deschc);
-	    hcm.setDisplayName("" + ChatColor.DARK_GRAY + "HL - Hack de Luta");
-	    hc.setItemMeta(hcm);
-	    
-	    hd = new ItemStack(Material.BOOK_AND_QUILL);
-	    hdm = hd.getItemMeta();
-	    List<String> deschd = new ArrayList<String>();
-	    deschd.add("§bDescrição");
-	    deschd.add("");
-	    deschd.add("" + ChatColor.GRAY + "Utilizar derp hack.");
-	    deschc.add("");
-	    deschc.add("");
-	    deschd.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    hdm.setLore(deschd);
-	    hdm.setDisplayName("" + ChatColor.DARK_GRAY + "DH - Derp Hack");
-	    hd.setItemMeta(hdm);
-	    
-	    hm = new ItemStack(Material.BOOK_AND_QUILL);
-	    hmm = hm.getItemMeta();
-	    List<String> deschm = new ArrayList<String>();
-	    deschm.add("§bDescrição");
-	    deschm.add("");
-	    deschm.add("" + ChatColor.GRAY + "Utilizar hack de luta e de movimento ao mesmo tempo.");
-	    deschm.add("");
-	    deschm.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    hmm.setLore(deschm);
-	    hmm.setDisplayName("" + ChatColor.DARK_GRAY + "MH - Múltiplos Hacks");
-	    hm.setItemMeta(hmm);
-	    
-	    hmv = new ItemStack(Material.BOOK_AND_QUILL);
-	    hmvm = hmv.getItemMeta();
-	    List<String> deschmv = new ArrayList<String>();
-	    deschmv.add("§bDescrição");
-	    deschmv.add("");
-	    deschmv.add("" + ChatColor.GRAY + "Utilizar hack que modifique a movimentação.");
-	    deschmv.add("");
-	    deschmv.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    hmvm.setLore(deschmv);
-	    hmvm.setDisplayName("" + ChatColor.DARK_GRAY + "HMV - Hack de Movimento");
-	    hmv.setItemMeta(hmvm);
-	    
-	    mna = new ItemStack(Material.BOOK_AND_QUILL);
-	    mnam = mna.getItemMeta();
-	    List<String> descmna = new ArrayList<String>();
-	    descmna.add("§bDescrição");
-	    descmna.add("");
-	    descmna.add("" + ChatColor.GRAY + "Utilizar um mod não autorizado.");
-	    descmna.add("");
-	    descmna.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    mnam.setLore(descmna);
-	    mnam.setDisplayName("" + ChatColor.DARK_GRAY + "MNP - Mod Não Permitido");
-	    mna.setItemMeta(mnam);
-	    
-	    sh = new ItemStack(Material.BOOK_AND_QUILL);
-	    shm = sh.getItemMeta();
-	    List<String> descsh = new ArrayList<String>();
-	    descsh.add("§bDescrição");
-	    descsh.add("");
-	    descsh.add("" + ChatColor.GRAY + "Executa movimentos suspeitos ou aciona");
-	    descsh.add("" + ChatColor.GRAY + "constantemente o sistema anti-cheat.");
-	    descsh.add("");
-	    descsh.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    shm.setLore(descsh);
-	    shm.setDisplayName("" + ChatColor.DARK_GRAY + "SH - Suspeita de Hack");
-	    sh.setItemMeta(shm);
-	    
-	    ao = new ItemStack(Material.BOOK_AND_QUILL);
-	    aom = ao.getItemMeta();
-	    List<String> descao = new ArrayList<String>();
-	    descao.add("§bDescrição");
-	    descao.add("");
-	    descao.add("" + ChatColor.GRAY + "Utilizar um nick com conotação sexual, ofensivo ou palavrões.");
-	    descao.add("");
-	    descao.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    aom.setLore(descao);
-	    aom.setDisplayName("" + ChatColor.DARK_GRAY + "NOI - Nick Ofensivo ou Inapropriado");
-	    ao.setItemMeta(aom);
-	    
-	    asg = new ItemStack(Material.BOOK_AND_QUILL);
-	    asgm = asg.getItemMeta();
-	    List<String> descasg = new ArrayList<String>();
-	    descasg.add("§bDescrição");
-	    descasg.add("");
-	    descasg.add("" + ChatColor.GRAY + "Agachar e levantar (shift) rapidamente atrás de um");
-	    descasg.add("" + ChatColor.GRAY + "player fingindo estar praticando ato sexual.");
-	    descasg.add("");
-	    descasg.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    asgm.setLore(descasg);
-	    asgm.setDisplayName("" + ChatColor.DARK_GRAY + "FAS - Fingir Ato Sexual");
-	    asg.setItemMeta(asgm);
-	    
-	    coi = new ItemStack(Material.BOOK_AND_QUILL);
-	    coim = coi.getItemMeta();
-	    List<String> desccoi = new ArrayList<String>();
-	    desccoi.add("§bDescrição");
-	    desccoi.add("");
-	    desccoi.add("" + ChatColor.GRAY + "Utilizar capa com conotação sexual, ofensiva ou com palavrões.");
-	    desccoi.add("");
-	    desccoi.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    coim.setLore(desccoi);
-	    coim.setDisplayName("" + ChatColor.DARK_GRAY + "CI - Capa Inapropriada");
-	    coi.setItemMeta(coim);
-	    
-	    fen = new ItemStack(Material.BOOK_AND_QUILL);
-	    fenm = fen.getItemMeta();
-	    List<String> descfen = new ArrayList<String>();
-	    descfen.add("§bDescrição");
-	    descfen.add("");
-	    descfen.add("" + ChatColor.GRAY + "Utilizar um nick parecido de algum membro da staff.");
-	    descfen.add("");
-	    descfen.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    fenm.setLore(descfen);
-	    fenm.setDisplayName("" + ChatColor.DARK_GRAY + "FSN - Fingir ser da Staff por Nick");
-	    fen.setItemMeta(fenm);
-	    
-	    pc = new ItemStack(Material.BOOK_AND_QUILL);
-	    pcm = pc.getItemMeta();
-	    List<String> descpc = new ArrayList<String>();
-	    descpc.add("§bDescrição");
-	    descpc.add("");
-	    descpc.add("" + ChatColor.GRAY + "Conta mal-intencionada (comprometida, duplicada ou hackeada).");
-	    descpc.add("");
-	    descpc.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    pcm.setLore(descpc);
-	    pcm.setDisplayName("" + ChatColor.DARK_GRAY + "CMI - Conta Mal Intencionada");
-	    pc.setItemMeta(pcm);
-	    
-	    pf = new ItemStack(Material.BOOK_AND_QUILL);
-	    pfm = pf.getItemMeta();
-	    List<String> descpf = new ArrayList<String>();
-	    descpf.add("§bDescrição");
-	    descpf.add("");
-	    descpf.add("" + ChatColor.GRAY + "Forjar uma prova para fazer com que");
-	    descpf.add("" + ChatColor.GRAY + "um jogador seja punido injustamente.");
-	    descpf.add("");
-	    descpf.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    pfm.setLore(descpf);
-	    pfm.setDisplayName("" + ChatColor.DARK_GRAY + "FPD - Forjar Prova de Denúncia");
-	    pf.setItemMeta(pfm);
-	    
-	    soi = new ItemStack(Material.BOOK_AND_QUILL);
-	    soim = soi.getItemMeta();
-	    List<String> descsoi = new ArrayList<String>();
-	    descsoi.add("§bDescrição");
-	    descsoi.add("");
-	    descsoi.add("" + ChatColor.GRAY + "Utilizar skin com conotação sexual, com propaganda ou ofensiva.");
-	    descsoi.add("");
-	    descsoi.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
-	    soim.setLore(descsoi);
-	    soim.setDisplayName("" + ChatColor.DARK_GRAY + "SI - Skin Inapropriada");
-	    soi.setItemMeta(soim);
-	    
-	    inv.setItem(4, cabeca);
-	    inv.setItem(10, abj);
-	    inv.setItem(11, aemj);
-	    inv.setItem(12, co);
-	    inv.setItem(13, fc);
-	    inv.setItem(14, gr);
-	    inv.setItem(15, vreb);
-	    inv.setItem(16, hc);
-	    inv.setItem(19, hd);
-	    inv.setItem(20, hm);
-	    inv.setItem(21, hmv);
-	    inv.setItem(22, mna);
-	    inv.setItem(23, sh);
-	    inv.setItem(24, ao);
-	    inv.setItem(25, asg);
-	    inv.setItem(28, coi);
-	    inv.setItem(29, fen);
-	    inv.setItem(30, pc);
-	    inv.setItem(31, pf);
-	    inv.setItem(32, soi);
-	    
-	    punisher.openInventory(inv);
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+		ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.gameViolations");
+		if(Main.pl.getConfig().get("punishments.gameViolations") == null) {
+			punisher.closeInventory();
+			punisher.sendMessage(ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Não foram encontradas violações de jogo configuradas");
+			return;
+		}
+		for(String s : c.getKeys(false)) {
+			ItemStack chat = new ItemStack(Material.NETHER_STAR);
+			ItemMeta chatm = chat.getItemMeta();
+			List<String> descchat = new ArrayList<String>();
+			descchat.add(ChatColor.AQUA + "Descrição");
+			descchat.add("");
+			descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
+			descchat.add("");
+			descchat.add(ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
+			descchat.add("");
+			descchat.add(ChatColor.DARK_RED + "Uma prova " + prova);
+			chatm.setLore(descchat);
+			chatm.setDisplayName(ChatColor.DARK_GRAY + c.getString(s + ".stname") + " - " + c.getString(s + ".name"));
+			chat.setItemMeta(chatm);
+			items.add(chat);
+		}
+		
+		new ScrollerInventory(items, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished, punisher);
 	}
 	
 	
@@ -844,18 +334,18 @@ public class MainPunish implements Listener{
 		}
 		if(inact) {
 			flag = "Flagrante";
-			sla = "em §aflagrante";
+			sla = "em " + ChatColor.GREEN + "flagrante";
 			prova2 = "poderá ser anexada posteriormente!";
 		} else {
 			flag = "Denúncia";
 			prova2 = "deverá ser anexada!";
-			sla = "com base em uma §adenúncia";
+			sla = "com base em uma " + ChatColor.GREEN + "denúncia";
 		}
 		
 		cabeca = new ItemStack(397, 1, (short) 3);
 	    cabecam = (SkullMeta) cabeca.getItemMeta();
 	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + "§lPUNIR: " + ChatColor.RED + "Revisão e punimento");
+	    desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "PUNIR: " + ChatColor.RED + "Revisão e punimento");
 	    desccab.add("");
 	    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + "" + flag);
 	    desccab.add("" + ChatColor.WHITE + "Tipo de punição: " + ChatColor.YELLOW + "" + tipopun);
@@ -888,7 +378,7 @@ public class MainPunish implements Listener{
 	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban permanente");
 	    }
 	    
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "§lPunir: "+punished);
+	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
 	    cabecam.setOwner(punished);
 	    cabecam.setLore(desccab);
 	    cabeca.setItemMeta(cabecam);
@@ -896,14 +386,14 @@ public class MainPunish implements Listener{
 	    flagr = new ItemStack(Material.DISPENSER);
 	    flagrm = flagr.getItemMeta();
 	    List<String> descflagr = new ArrayList<String>();
-	    descflagr.add("§bModo de Punição: " + ChatColor.YELLOW + "Flagrante");
+	    descflagr.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Flagrante");
 	    descflagr.add("");
 	    descflagr.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + "" + punished);
 	    descflagr.add("" + ChatColor.GRAY + "em flagrante");
 	    descflagr.add("");
 	    descflagr.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
 	    descflagr.add("");
-	    descflagr.add("" + ChatColor.YELLOW + "Clique para alterar para o modo §bdenúncia");
+	    descflagr.add("" + ChatColor.YELLOW + "Clique para alterar para o modo " + ChatColor.AQUA + "denúncia");
 	    flagrm.setLore(descflagr);
 	    flagrm.setDisplayName("" + ChatColor.DARK_GRAY + "Flagrante");
 	    flagr.setItemMeta(flagrm);
@@ -911,14 +401,14 @@ public class MainPunish implements Listener{
 	    denun = new ItemStack(Material.PAPER);
 	    denunm = denun.getItemMeta();
 	    List<String> descdenun = new ArrayList<String>();
-	    descdenun.add("§bModo de Punição: " + ChatColor.YELLOW + "Denúncia");
+	    descdenun.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Denúncia");
 	    descdenun.add("");
 	    descdenun.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + "" + punished);
 	    descdenun.add("" + ChatColor.GRAY + "com base em uma denúncia");
 	    descdenun.add("");
 	    descdenun.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
 	    descdenun.add("");
-	    descdenun.add("" + ChatColor.YELLOW + "Clique para alterar para o modo §bflagrante");
+	    descdenun.add("" + ChatColor.YELLOW + "Clique para alterar para o modo " + ChatColor.AQUA + "flagrante");
 	    denunm.setLore(descdenun);
 	    denunm.setDisplayName("" + ChatColor.DARK_GRAY + "Denúncia");
 	    denun.setItemMeta(denunm);
@@ -926,7 +416,7 @@ public class MainPunish implements Listener{
 	    prova = new ItemStack(Material.ITEM_FRAME);
 	    provam = prova.getItemMeta();
 	    List<String> descprova = new ArrayList<String>();
-	    descprova.add("§bAnexo de prova");
+	    descprova.add("" + ChatColor.AQUA + "Anexo de prova");
 	    descprova.add("");
 	    descprova.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + "" + punished);
 	    descprova.add("" + ChatColor.GRAY + "" + sla);
@@ -941,9 +431,9 @@ public class MainPunish implements Listener{
 	    conf = new ItemStack(Material.STAINED_CLAY, 1, (short) 4);
 	    confm = conf.getItemMeta();
 	    desccab.add("");
-	    desccab.add("§aClique para punir");
+	    desccab.add("" + ChatColor.GREEN + "Clique para punir");
 	    confm.setLore(desccab);
-	    confm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para punir §b" + punished + " " + ChatColor.DARK_GRAY + "" + sla);
+	    confm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para punir " + ChatColor.AQUA + "" + punished + " " + ChatColor.DARK_GRAY + "" + sla);
 	    conf.setItemMeta(confm);
 	    
 	    canc = new ItemStack(Material.STAINED_CLAY, 1, (short) 14);
@@ -970,7 +460,6 @@ public class MainPunish implements Listener{
 	    inv.setItem(36, canc);
 	    inv.setItem(37, canc);
 	    inv.setItem(38, canc);
-	    
 	    inv.setItem(24, conf);
 	    inv.setItem(25, conf);
 	    inv.setItem(26, conf);
@@ -991,10 +480,10 @@ public class MainPunish implements Listener{
 		cabeca = new ItemStack(397, 1, (short) 3);
 	    cabecam = (SkullMeta) cabeca.getItemMeta();
 	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + "§lPunir: " + ChatColor.RED + "Escolha a violação para");
+	    desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Escolha a violação para");
 	    desccab.add("" + ChatColor.RED + "editar a punição.");
 	    desccab.add("");
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "§lPunições de: "+punished);
+	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punições de: "+punished);
 	    cabecam.setOwner(punished);
 	    cabecam.setLore(desccab);
 	    cabeca.setItemMeta(cabecam);
@@ -1255,23 +744,17 @@ public class MainPunish implements Listener{
 				        if(e.getCurrentItem() == null) return;
 				        if(e.getCurrentItem().getItemMeta() == null) return;
 				        if(e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
-				        //If the pressed item was a nextpage button
 				        if(e.getCurrentItem().getItemMeta().getDisplayName().equals(ScrollerInventory.nextPageName)){
 				            e.setCancelled(true);
-				            //If there is no next page, don't do anything
 				            if(inv.currpage >= inv.pages.size()-1){
 				                return;
 				            }else{
-				                //Next page exists, flip the page
 				                inv.currpage += 1;
 				                p.openInventory(inv.pages.get(inv.currpage));
 				            }
-				                        //if the pressed item was a previous page button
 				        }else if(e.getCurrentItem().getItemMeta().getDisplayName().equals(ScrollerInventory.previousPageName)){
 				             e.setCancelled(true);
-				             //If the page number is more than 0 (So a previous page exists)
 				             if(inv.currpage > 0){
-				             //Flip to previous page
 				                 inv.currpage -= 1;
 				                 p.openInventory(inv.pages.get(inv.currpage));
 				             }
@@ -1452,7 +935,6 @@ public class MainPunish implements Listener{
 					try {
 						editarPunicao(p, punish.get(p.getName()), 2);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					return;
@@ -1462,7 +944,6 @@ public class MainPunish implements Listener{
 					try {
 						editarPunicao(p, punish.get(p.getName()), 1);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					return;
@@ -1498,205 +979,22 @@ public class MainPunish implements Listener{
 					return;
 				}
 				//violações de chat
-				if(e.getCurrentItem().isSimilar(abc)) {
+				if(e.getCurrentItem().getType().equals(Material.NETHER_STAR) && punish.containsKey(p.getName())) {
 					e.setCancelled(true);
 					String punished = punish.get(p.getName());
 					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("ubc", punished), "ubc", "Usar intencionalmente um erro existente no sistema de chat.");
-				}
-				if(e.getCurrentItem().isSimilar(ae)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("pae", punished), "pae", "Discutir persistentemente sobre ações de um membro da equipe.");
-				}
-				if(e.getCurrentItem().isSimilar(as)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("msj", punished), "msj", "Enviar mensagem sexual direcionada a um jogador.");
-				}
-				if(e.getCurrentItem().isSimilar(bfc)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("ipc", punished), "ipc", "Desfigurar uma palavra protegida com o objetivo de ignorar a proteção do chat.");
-				}
-				if(e.getCurrentItem().isSimilar(ct)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("tc", punished), "tc", 	"Enviar mensagens fazendo jogadores executarem comandos indesejaveis intencionamente.");
-				}
-				if(e.getCurrentItem().isSimilar(dna)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("dvc", punished), "dvc", "Fazer divulgações ou anúncios sem autorização de um administrador.");
-				}
-				if(e.getCurrentItem().isSimilar(fec)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("fse", punished), "fse", "Falar no chat dizendo que faz parte da equipe quando não faz.");
-				}
-				if(e.getCurrentItem().isSimilar(fh)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("fld", punished), "fld", "Enviar a mesma mensagem varias vezes.");
-				}
-				if(e.getCurrentItem().isSimilar(fpc)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("iqr", punished), "iqr", "Fazer outros jogadores violarem regras para serem punidos.");
-				}
-				if(e.getCurrentItem().isSimilar(mi)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("ma", punished), "ma", "Mensagem com conotação sexual ou nojentas.");
-				}
-				if(e.getCurrentItem().isSimilar(oe)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("ost", punished), "ost", " Ofender ou enviar mensagens abusivas a um jogador que seja um membro da equipe.");
-				}
-				if(e.getCurrentItem().isSimilar(oj)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("op", punished), "op", "Ofender ou enviar mensagens abusivas a um jogador comum.");
-				}
-				if(e.getCurrentItem().isSimilar(os)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("osv", punished), "osv", "Ofender ou enviar mensagens abusivas ao servidor.");
-				}
-				if(e.getCurrentItem().isSimilar(risme)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "chat", getSev("rme", punished), "rme", "Dizer a outro jogador que existe um staff disfarçado no servidor quando realmente existe um.");
-				}
-
-				//Violações de jogo
-				if(e.getCurrentItem().isSimilar(abj)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("ubj", punished), "ubj", "Abusar constantemente de erro existente no jogo.");
-				}
-				if(e.getCurrentItem().isSimilar(aemj)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("ubm", punished), "ubm", "Usar intencionalmente um erro existente no mapa.");
-				}
-				if(e.getCurrentItem().isSimilar(co)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("ci", punished), "ci", "Fazer construções ou desenhos inapropriados.");
-				}
-				if(e.getCurrentItem().isSimilar(fc)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("sc", punished), "sc", "Enviar comandos constantemente para floodar o chat de outros jogadores ou para causar lag no servidor.");
-				}
-				if(e.getCurrentItem().isSimilar(gr)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("grf", punished), "grf", "Prejudicar ou Destruir qualquer coisa que não seja sua propositalmente.");
-				}
-				if(e.getCurrentItem().isSimilar(vreb)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("vrcc", punished), "vrcc", "Fazer construções ou desenhos de mensagens que violam alguma regra existente.");
-				}
-				if(e.getCurrentItem().isSimilar(hc)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("hl", punished), "hl", "Utilizar qualquer tipo de hack ou mod que alteram o jogador em sua forma de lutar mas que não altere a sua movimentação.");
-				}
-				if(e.getCurrentItem().isSimilar(hd)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("dh", punished), "dh", "Utilizar derp hack.");
-				}
-				if(e.getCurrentItem().isSimilar(hm)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("mh", punished), "mh", "Utilizar hack de luta e de movimento ao mesmo tempo.");
-				}
-				if(e.getCurrentItem().isSimilar(hmv)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("hmv", punished), "hmv", "Utilizar hack que modifique a movimentação.");
-				}
-				if(e.getCurrentItem().isSimilar(mna)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("mnp", punished), "mnp", "Utilizar um mod não autorizado.");
-				}
-				if(e.getCurrentItem().isSimilar(sh)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("sh", punished), "sh", "Executa movimentos suspeitos ou aciona constantemente o sistema anti-cheat.");
-				}
-				if(e.getCurrentItem().isSimilar(ao)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("noi", punished), "noi", "Utilizar um nick com conotação sexual, ofensivo ou palavrões.");
-				}
-				if(e.getCurrentItem().isSimilar(asg)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("fas", punished), "fas", "Agachar e levantar (shift) rapidamente atrás de um player fingindo estar praticando ato sexual.");
-				}
-				if(e.getCurrentItem().isSimilar(coi)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("ci", punished), "ci", "Utilizar capa com conotação sexual, ofensiva ou com palavrões.");
-				}
-				if(e.getCurrentItem().isSimilar(fen)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("fsn", punished), "fsn", "Utilizar um nick parecido de algum membro da staff.");
-				}
-				if(e.getCurrentItem().isSimilar(pc)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("cmi", punished), "cmi", "Conta mal-intencionada (comprometida, duplicada ou hackeada).");
-				}
-				if(e.getCurrentItem().isSimilar(pf)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("fpd", punished), "fpd", "Forjar uma prova para fazer com que um jogador seja punido injustamente.");
-				}
-				if(e.getCurrentItem().isSimilar(soi)) {
-					e.setCancelled(true);
-					String punished = punish.get(p.getName());
-					p.closeInventory();
-					openFPunish(p, punished, flagra, "jogo", getSev("si", punished), "si", "Utilizar skin com conotação sexual, com propaganda ou ofensiva.");
+					ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.gameViolations");
+					for(String s : c.getKeys(false)) {
+						if(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()).toUpperCase().startsWith((c.getString(s + ".stname").toUpperCase()))) {
+							openFPunish(p, punished, flagra, "jogo", getSev(c.getString(s + ".stname"), punished), c.getString(s + ".stname"), c.getString(s + ".description"));
+						}
+					}
+					ConfigurationSection c2 = Main.pl.getConfig().getConfigurationSection("punishments.chatViolations");
+					for(String s : c2.getKeys(false)) {
+						if(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()).toUpperCase().startsWith((c2.getString(s + ".stname").toUpperCase()))) {
+							openFPunish(p, punished, flagra, "chat", getSev(c2.getString(s + ".stname"), punished), c2.getString(s + ".stname"), c2.getString(s + ".description"));
+						}
+					}
 				}
 				if(e.getCurrentItem().isSimilar(flagr)) {
 					p.closeInventory();
@@ -1816,7 +1114,7 @@ public class MainPunish implements Listener{
 		Player p = Bukkit.getPlayer(punished);
 		String flag = "";
 		if(inact) {
-			flag = "§bem flagrante";
+			flag = "" + ChatColor.AQUA + "em flagrante";
 		} else {
 			flag = "" + ChatColor.GOLD + "por denúncia";
 		}
@@ -1886,119 +1184,31 @@ public class MainPunish implements Listener{
 	}
 	
 	public static String getName(String sigl) {
-		String namePun = "";
-		if(sigl.equalsIgnoreCase("ubc")) {
-			namePun = "Uso de Bug do Chat";
+		ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.gameViolations");
+		for(String s : c.getKeys(false)) {
+			if(sigl.equalsIgnoreCase(c.getString(s + ".stname").toUpperCase())) {
+				return c.getString(s + ".name");
+			}
 		}
-		if(sigl.equalsIgnoreCase("PAE")) {
-			namePun = "Persistir Discussão com Membro da Equipe";
+		ConfigurationSection c2 = Main.pl.getConfig().getConfigurationSection("punishments.chatViolations");
+		for(String s : c2.getKeys(false)) {
+			if(sigl.equalsIgnoreCase(c.getString(s + ".stname").toUpperCase())) {
+				return c.getString(s + ".name");
+			}
 		}
-		if(sigl.equalsIgnoreCase("msj")) {
-			namePun = "Mensagem Sexual a um Jogador";
-		}
-		if(sigl.equalsIgnoreCase("ipc")) {
-			namePun = "Ignorar Proteção do Chat";
-		}
-		if(sigl.equalsIgnoreCase("tc")) {
-			namePun = "Trolar no Chat";
-		}
-		if(sigl.equalsIgnoreCase("dvc")) {
-			namePun = "Divulgação";
-		}
-		if(sigl.equalsIgnoreCase("fse")) {
-			namePun = "Fingir ser da Equipe";
-		}
-		if(sigl.equalsIgnoreCase("fld")) {
-			namePun = "Flood";
-		}
-		if(sigl.equalsIgnoreCase("iqr")) {
-			namePun = "Incentivar Quebra de Regra";
-		}
-		if(sigl.equalsIgnoreCase("ma")) {
-			namePun = "Mensagem Abusiva";
-		}
-		if(sigl.equalsIgnoreCase("ost")) {
-			namePun = "Ofensa a Staff";
-		}
-		if(sigl.equalsIgnoreCase("op")) {
-			namePun = "Ofensa a Player";
-		}
-		if(sigl.equalsIgnoreCase("osv")) {
-			namePun = "Ofensa ao Servidor";
-		}
-		if(sigl.equalsIgnoreCase("rme")) {
-			namePun = "Revelar um Membro da Equipe";
-		}
-		if(sigl.equalsIgnoreCase("ubj")) {
-			namePun = "Uso de Bug do Jogo";
-		}
-		if(sigl.equalsIgnoreCase("ubm")) {
-			namePun = "Uso de Bug do Mapa";
-		}
-		if(sigl.equalsIgnoreCase("ci")) {
-			namePun = "Construção Inapropriada";
-		}
-		if(sigl.equalsIgnoreCase("sc")) {
-			namePun = "Spam de Comandos";
-		}
-		if(sigl.equalsIgnoreCase("grf")) {
-			namePun = "Griefing";
-		}
-		if(sigl.equalsIgnoreCase("vrcc")) {
-			namePun = "Violar Regra de Chat em uma Construção";
-		}
-		if(sigl.equalsIgnoreCase("hl")) {
-			namePun = "Hack de Luta";
-		}
-		if(sigl.equalsIgnoreCase("dh")) {
-			namePun = "Derp Hack";
-		}
-		if(sigl.equalsIgnoreCase("mh")) {
-			namePun = "Múltiplos Hacks";
-		}
-		if(sigl.equalsIgnoreCase("hmv")) {
-			namePun = "Hack de Movimento";
-		}
-		if(sigl.equalsIgnoreCase("mnp")) {
-			namePun = "Mod Não Permitido";
-		}
-		if(sigl.equalsIgnoreCase("sh")) {
-			namePun = "Suspeita de Hack";
-		}
-		if(sigl.equalsIgnoreCase("noi")) {
-			namePun = "Nick Ofensivo ou Inapropriado";
-		}
-		if(sigl.equalsIgnoreCase("fas")) {
-			namePun = "Fingir Ato Sexual";
-		}
-		if(sigl.equalsIgnoreCase("ci")) {
-			namePun = "Capa Inapropriada";
-		}
-		if(sigl.equalsIgnoreCase("fsn")) {
-			namePun = "Fingir ser da Staff por Nick";
-		}
-		if(sigl.equalsIgnoreCase("cmi")) {
-			namePun = "Conta Mal Intencionada";
-		}
-		if(sigl.equalsIgnoreCase("fpd")) {
-			namePun = "Forjar Prova de Denúncia";
-		}
-		if(sigl.equalsIgnoreCase("si")) {
-			namePun = "Skin Inapropriada";
-		}
-		return namePun;
+		return "";
 	}
 	
 	public static void sendWarn(String punished, String proof, String sigl, boolean inact, String desc, int id) {
 		if(Bukkit.getPlayer(punished) instanceof Player) {
 			Player p = Bukkit.getPlayer(punished);
-			String flag = "";
+			String flaga = "";
 			if(inact) {
-				flag = "§bem flagrante";
+				flaga = ChatColor.AQUA + "em flagrante";
 			} else {
-				flag = "" + ChatColor.GOLD + "por denúncia";
+				flaga = "" + ChatColor.GOLD + "por denúncia";
 			}
-			p.sendMessage("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + id + "] " + flag + " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + "" + proof + " \n" + ChatColor.YELLOW + "" + desc + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD + "' para poder jogar e falar novamente.");
+			p.sendMessage("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + id + "] " + flaga + " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + "" + proof + " \n" + ChatColor.YELLOW + "" + desc + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD + "' para poder jogar e falar novamente.");
 			emwarn.add(punished);
 		}
 	}
@@ -2119,104 +1329,17 @@ public class MainPunish implements Listener{
 	
 	public static int getSev(String sigl, String punished) {
 		int severidade = 0;
-		if(sigl.equalsIgnoreCase("ubc")) {
-			severidade = 2;
+		ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.gameViolations");
+		for(String s : c.getKeys(false)) {
+			if(sigl.equalsIgnoreCase(c.getString(s + ".stname"))) {
+				severidade = c.getInt(s + ".severity");
+			}
 		}
-		if(sigl.equalsIgnoreCase("pae")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("msj")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("ipc")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("tc")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("dvc")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("fse")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("fld")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("iqr")) {
-			severidade = 3;
-		}
-		if(sigl.equalsIgnoreCase("ma")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("ost")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("op")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("osv")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("rme")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("ubj")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("ubm")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("ci")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("sc")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("grf")) {
-			severidade = 3;
-		}
-		if(sigl.equalsIgnoreCase("vrc")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("hl")) {
-			severidade = 8;
-		}
-		if(sigl.equalsIgnoreCase("dh")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("mh")) {
-			severidade = 10;
-		}
-		if(sigl.equalsIgnoreCase("hmv")) {
-			severidade = 10;
-		}
-		if(sigl.equalsIgnoreCase("mnp")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("sh")) {
-			severidade = 1;
-		}
-		if(sigl.equalsIgnoreCase("noi")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("fas")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("ci")) {
-			severidade = 3;
-		}
-		if(sigl.equalsIgnoreCase("fsn")) {
-			severidade = 2;
-		}
-		if(sigl.equalsIgnoreCase("cmi")) {
-			severidade = 10;
-		}
-		if(sigl.equalsIgnoreCase("fpd")) {
-			severidade = 3;
-		}
-		if(sigl.equalsIgnoreCase("si")) {
-			severidade = 1;
+		ConfigurationSection c2 = Main.pl.getConfig().getConfigurationSection("punishments.chatViolations");
+		for(String s : c2.getKeys(false)) {
+			if(sigl.equalsIgnoreCase(c2.getString(s + ".stname"))) {
+				severidade = c2.getInt(s + ".severity");
+			}
 		}
 		try {
 			Statement s = Main.c.createStatement();
