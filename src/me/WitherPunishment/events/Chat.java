@@ -25,23 +25,31 @@ public class Chat implements Listener{
 		Player p = e.getPlayer();
 			if(isMuted(p)) {
 				e.setCancelled(true);
-				p.sendMessage("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você não pode falar pois recebeu uma " + ChatColor.RED + "punição " + ChatColor.GOLD + "que proíbe o uso do chat. " + ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/punicoes " + ChatColor.GRAY + "para mais informações.");
+				if(Main.english) {
+					p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You can't talk because you received a " + ChatColor.RED + "punishment " + ChatColor.GOLD + "that prohibits the use of chat. " + ChatColor.GOLD + "Use " + ChatColor.RED + "/punishments " + ChatColor.GOLD + "for more informations.");
+					return;
+				}
+				p.sendMessage(ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você não pode falar pois recebeu uma " + ChatColor.RED + "punição " + ChatColor.GOLD + "que proíbe o uso do chat. " + ChatColor.GOLD + "Use " + ChatColor.RED + "/punicoes " + ChatColor.GOLD + "para mais informações.");
 				return;
 			}
 		if(MainPunish.emwarn.contains(p.getName())) {
-			if(!e.getMessage().equalsIgnoreCase("entendi")) {
+			if(!(e.getMessage().equalsIgnoreCase("entendi")) && !(e.getMessage().equalsIgnoreCase("understood"))) {
 				e.setCancelled(true);
 				p.sendMessage(MainPunish.getLastWarn(p.getName()));
 				return;
 			}
-			p.sendMessage("" + ChatColor.BLUE + "Punição> " + ChatColor.GRAY + "Ok, cuidado para não quebrar as regras novamente. Você já pode se comunicar.");
+			if(Main.english) {
+				p.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.GRAY + "Ok, be careful for not break the rules again. You can now communicate.");
+			} else {
+				p.sendMessage(ChatColor.BLUE + "Punição> " + ChatColor.GRAY + "Ok, cuidado para não quebrar as regras novamente. Você já pode se comunicar.");
+			}
 			MainPunish.emwarn.remove(p.getName());
 			e.setCancelled(true);
 			return;
 		}		
 		if(MainPunish.emprova.contains(p.getName())) {
 			e.setCancelled(true);
-			if(e.getMessage().equalsIgnoreCase("cancelar")) {
+			if(e.getMessage().equalsIgnoreCase("cancelar") || e.getMessage().equalsIgnoreCase("cancel")) {
 				MainPunish.reabrirInv(p);
 				MainPunish.emprova.remove(p.getName());
 			} else if(e.getMessage().toLowerCase().startsWith("http://") || (e.getMessage().toLowerCase().startsWith("https://"))) {
@@ -49,13 +57,18 @@ public class Chat implements Listener{
 				MainPunish.reabrirInv(p);
 				MainPunish.emprova.remove(p.getName());
 			} else {
-				p.sendMessage("" + ChatColor.BLUE + "Punir> " + ChatColor.GRAY + "A prova precisa ser um link, você pode cancelar digitando 'cancelar'");
+				if(Main.english) {
+					p.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "The proof need be a link, you can cancel by typing 'cancel'");
+					return;
+				}
+				p.sendMessage(ChatColor.BLUE + "Punir> " + ChatColor.GRAY + "A prova precisa ser um link, você pode cancelar digitando 'cancelar'");
+				return;
 			}
 			return;
 		}	
 		if(MainPunish.eprova.contains(p.getName())) {
 			e.setCancelled(true);
-			if(e.getMessage().equalsIgnoreCase("cancelar")) {
+			if(e.getMessage().equalsIgnoreCase("cancelar") || e.getMessage().equalsIgnoreCase("cancel")) {
 				MainPunish.reabrirInv(p);
 				MainPunish.eprova.remove(p.getName());
 			} else if(e.getMessage().toLowerCase().startsWith("http://") || (e.getMessage().toLowerCase().startsWith("https://"))) {
@@ -63,17 +76,33 @@ public class Chat implements Listener{
 				MainPunish.editPunish(p, MainPunish.editando.get(p.getName()));
 				MainPunish.eprova.remove(p.getName());
 			} else {
-				p.sendMessage("" + ChatColor.BLUE + "Editar Punição> " + ChatColor.GRAY + "A prova precisa ser um link, você pode cancelar digitando 'cancelar'");
+				if(Main.english) {
+					p.sendMessage(ChatColor.BLUE + "Edit Punishment> " + ChatColor.GRAY + "The proof need be a link, you can cancel by typing 'cancel'");
+					return;
+				}
+				p.sendMessage(ChatColor.BLUE + "Editar Punição> " + ChatColor.GRAY + "A prova precisa ser um link, você pode cancelar digitando 'cancelar'");
+				return;
 			}
 			return;
 		}	
 		e.setFormat("" + ChatColor.YELLOW + "" + p.getName() + "" + ChatColor.BLUE + " >> " + ChatColor.WHITE + "" + e.getMessage());
 		if(!p.hasPermission("punish.chat.punish")) {
-			TextComponent punir = new TextComponent("" + ChatColor.DARK_RED + "[Punir]");
-			TextComponent traco = new TextComponent(" " + ChatColor.GOLD + "- ");
+			TextComponent punir = null;
+			if(Main.english) {
+				punir = new TextComponent(ChatColor.DARK_RED + "[Punish]");
+			} else {
+				punir = new TextComponent(ChatColor.DARK_RED + "[Punir]");
+			}
+			TextComponent traco = new TextComponent(ChatColor.GOLD + " - ");
 			TextComponent format = new TextComponent(e.getFormat());
 			ClickEvent cv = new ClickEvent(Action.RUN_COMMAND, "/punir " + e.getPlayer().getName() + " chat");
-			HoverEvent hv = new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.WHITE + "Clique aqui para punir " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + " em flagrante \npor uma violação de chat").create());
+			ComponentBuilder cb = null;
+			if(Main.english) {
+				cb = new ComponentBuilder(ChatColor.WHITE + "Click here to punish " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + " in act \nfor a chat violation");
+			} else {
+				cb = new ComponentBuilder(ChatColor.WHITE + "Clique aqui para punir " + ChatColor.AQUA + p.getName() + ChatColor.WHITE + " em flagrante \npor uma violação de chat");
+			}
+			HoverEvent hv = new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT, cb.create());
 			punir.setClickEvent(cv);
 			punir.setHoverEvent(hv);
 			e.setCancelled(true);

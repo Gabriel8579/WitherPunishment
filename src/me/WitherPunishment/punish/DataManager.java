@@ -32,7 +32,7 @@ public class DataManager {
 			try {
 				Connection conn = DriverManager.getConnection(url);
 	            if (conn != null) {
-	                Main.pl.getServer().getConsoleSender().sendMessage("" + ChatColor.BLUE + "WitherPunishment Datas> " + ChatColor.YELLOW + "a new database has been created.");
+	                Main.pl.getServer().getConsoleSender().sendMessage(ChatColor.BLUE + "WitherPunishment Datas> " + ChatColor.YELLOW + "a new database has been created.");
 	            }
 	 
 	        } catch (SQLException e) {

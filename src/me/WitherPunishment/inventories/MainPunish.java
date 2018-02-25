@@ -58,8 +58,6 @@ public class MainPunish implements Listener{
 	public static ItemMeta confm;
 	public static ItemStack canc;
 	public static ItemMeta cancm;
-
-	//Inventario editar punição
 	public static ItemStack punicoes;
 	public static ItemMeta punicoesm;
 	public static ItemStack pjogo;
@@ -121,13 +119,22 @@ public class MainPunish implements Listener{
 			descr = "";
 			tip = "";
 			provaa = "";
-			Inventory inv = Bukkit.createInventory(null, 9*3, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished);
+			String ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished;
+			if(Main.english) {
+				ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + punished;
+			}
+			Inventory inv = Bukkit.createInventory(null, 9*3, ninv);
 			
 			cabeca = new ItemStack(397, 1, (short) 3);
 		    cabecam = (SkullMeta) cabeca.getItemMeta();
 		    List<String> desccab = new ArrayList<String>();
-		    desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Escolha o modo de punição");
-		    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
+		    if(Main.english) {
+		    	desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + ChatColor.RED + "Choose the punishment mode");
+		    	cabecam.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punish: "+punished);
+		    } else {
+		    	desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Escolha o modo de punição");
+		    	cabecam.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
+		    }
 		    cabecam.setOwner(punished);
 		    cabecam.setLore(desccab);
 		    cabeca.setItemMeta(cabecam);
@@ -135,42 +142,74 @@ public class MainPunish implements Listener{
 		    papel = new ItemStack(Material.PAPER);
 		    papelm = papel.getItemMeta();
 		    List<String> descpapel = new ArrayList<String>();
-		    descpapel.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Denúncia");
-		    descpapel.add("");
-		    descpapel.add("" + ChatColor.GRAY + "Escolha este modo para punir");
-		    descpapel.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
-		    descpapel.add("" + ChatColor.GRAY + "com base em uma denúncia");
-		    descpapel.add("");
-		    descpapel.add("" + ChatColor.DARK_RED + "Uma prova deverá ser anexada!");
+		    if(Main.english) {
+		    	descpapel.add("" + ChatColor.AQUA + "Punishment mode: " + ChatColor.YELLOW + "Report");
+			    descpapel.add("");
+			    descpapel.add("" + ChatColor.GRAY + "Choose this mode to punish");
+			    descpapel.add("" + ChatColor.GRAY + "the player " + ChatColor.RED + "" + punished);
+			    descpapel.add("" + ChatColor.GRAY + "based on a report.");
+			    descpapel.add("");
+			    descpapel.add("" + ChatColor.DARK_RED + "A proof need be attached!");
+			    papelm.setDisplayName(ChatColor.DARK_GRAY + "Punish based on a " + ChatColor.YELLOW + "REPORT");
+		    } else {
+		    	descpapel.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Denúncia");
+			    descpapel.add("");
+			    descpapel.add("" + ChatColor.GRAY + "Escolha este modo para punir");
+			    descpapel.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
+			    descpapel.add("" + ChatColor.GRAY + "com base em uma denúncia.");
+			    descpapel.add("");
+			    descpapel.add("" + ChatColor.DARK_RED + "Uma prova deverá ser anexada!");
+			    papelm.setDisplayName(ChatColor.DARK_GRAY + "Punir com base em " + ChatColor.YELLOW + "DENUNCIA");
+		    }
 		    papelm.setLore(descpapel);
-		    papelm.setDisplayName("" + ChatColor.DARK_GRAY + "Punir com base em " + ChatColor.YELLOW + "DENUNCIA");
 		    papel.setItemMeta(papelm);
 		    
 		    ejec = new ItemStack(Material.DISPENSER);
 		    ejecm = ejec.getItemMeta();
 		    List<String> descejec = new ArrayList<String>();
-		    descejec.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Flagrante");
-		    descejec.add("");
-		    descejec.add("" + ChatColor.GRAY + "Escolha este modo para punir");
-		    descejec.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
-		    descejec.add("" + ChatColor.GRAY + "em flagrante");
-		    descejec.add("");
-		    descejec.add("" + ChatColor.DARK_RED + "A prova pode ser anexada posteriormente!");
+		    if(Main.english) {
+		    	descejec.add("" + ChatColor.AQUA + "Punishment mode: " + ChatColor.YELLOW + "In act");
+			    descejec.add("");
+			    descejec.add("" + ChatColor.GRAY + "Choose this mode to punish");
+			    descejec.add("" + ChatColor.GRAY + "the player " + ChatColor.RED + "" + punished);
+			    descejec.add("" + ChatColor.GRAY + "in act");
+			    descejec.add("");
+			    descejec.add("" + ChatColor.DARK_RED + "A proof can be attached later!");
+			    ejecm.setDisplayName(ChatColor.DARK_GRAY + "Punish " + ChatColor.YELLOW + "IN ACT");
+		    } else {
+		    	descejec.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Flagrante");
+			    descejec.add("");
+			    descejec.add("" + ChatColor.GRAY + "Escolha este modo para punir");
+			    descejec.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
+			    descejec.add("" + ChatColor.GRAY + "em flagrante");
+			    descejec.add("");
+			    descejec.add("" + ChatColor.DARK_RED + "A prova pode ser anexada posteriormente!");
+			    ejecm.setDisplayName(ChatColor.DARK_GRAY + "Punir em " + ChatColor.YELLOW + "FLAGRANTE");
+		    }
 		    ejecm.setLore(descejec);
-		    ejecm.setDisplayName("" + ChatColor.DARK_GRAY + "Punir em " + ChatColor.YELLOW + "FLAGRANTE");
 		    ejec.setItemMeta(ejecm);
 		    
 		    punicoes = new ItemStack(Material.HOPPER);
 		    punicoesm = punicoes.getItemMeta();
 		    List<String> descpunicoes = new ArrayList<String>();
-		    descpunicoes.add("" + ChatColor.DARK_RED + "Punições de " + ChatColor.RED + "" + punished);
-		    descpunicoes.add(" ");
-		    descpunicoes.add("" + ChatColor.WHITE + "Violações de Chat: " + ChatColor.YELLOW + "" + getTotal(punished, 1));
-		    descpunicoes.add("" + ChatColor.WHITE + "Violações de Jogo: " + ChatColor.YELLOW + "" + getTotal(punished, 2));
-		    descpunicoes.add(" ");
-		    descpunicoes.add("" + ChatColor.YELLOW + "Clique para editar as punições");
+		    if(Main.english) {
+		    	descpunicoes.add("" + ChatColor.DARK_RED + punished + ChatColor.RED + "'s punishments");
+				descpunicoes.add(" ");
+				descpunicoes.add("" + ChatColor.WHITE + "Chat Violations: " + ChatColor.YELLOW + getTotal(punished, 1));
+				descpunicoes.add("" + ChatColor.WHITE + "Game Violations: " + ChatColor.YELLOW + getTotal(punished, 2));
+				descpunicoes.add(" ");
+				descpunicoes.add("" + ChatColor.YELLOW + "Click here to edit " + punished + "'s punishments");
+				punicoesm.setDisplayName(ChatColor.DARK_RED + punished + ChatColor.RED + "'s past punishments");
+		    } else {
+		    	descpunicoes.add("" + ChatColor.DARK_RED + "Punições de " + ChatColor.RED + "" + punished);
+			    descpunicoes.add(" ");
+				descpunicoes.add("" + ChatColor.WHITE + "Violações de Chat: " + ChatColor.YELLOW + "" + getTotal(punished, 1));
+				descpunicoes.add("" + ChatColor.WHITE + "Violações de Jogo: " + ChatColor.YELLOW + "" + getTotal(punished, 2));
+				descpunicoes.add(" ");
+				descpunicoes.add("" + ChatColor.YELLOW + "Clique para editar as punições");
+				punicoesm.setDisplayName(ChatColor.DARK_GRAY + "Punições passadas de " + ChatColor.RED + "" + punished);
+		    } 
 		    punicoesm.setLore(descpunicoes);
-		    punicoesm.setDisplayName("" + ChatColor.DARK_GRAY + "Punições passadas de " + ChatColor.RED + "" + punished);
 		    punicoes.setItemMeta(punicoesm);
 		    
 		    inv.setItem(4, cabeca);
@@ -184,24 +223,45 @@ public class MainPunish implements Listener{
 	
 	@SuppressWarnings("deprecation")
 	public static void openSecundaryPunish(Player punisher, String punished, boolean inact) {
-		Inventory inv = Bukkit.createInventory(null, 9*3, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished);
+		String ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished;
+		if(Main.english) {
+			ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + punished;
+		}
+		Inventory inv = Bukkit.createInventory(null, 9*3, ninv);
 		String flag = "";
 		String prova = "";
 		if(inact) {
-			flag = "Flagrante";
-			prova = "poderá ser anexada posteriormente!";
+			if(Main.english) {
+				flag = "In act";
+				prova = "can be attached later!";
+			} else {
+				flag = "Flagrante";
+				prova = "poderá ser anexada posteriormente!";
+			}
 		} else {
-			flag = "Denúncia";
-			prova = "deverá ser anexada!";
+			if(Main.english) {
+				flag = "Report";
+				prova = "need be attached!";
+			} else {
+				flag = "Denúncia";
+				prova = "deve ser anexada!";
+			}
 		}
 		
 		cabeca = new ItemStack(397, 1, (short) 3);
 	    cabecam = (SkullMeta) cabeca.getItemMeta();
 	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "PUNIR: " + ChatColor.RED + "Escolha o tipo de punição");
-	    desccab.add("");
-	    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + "" + flag);
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
+	    if(Main.english) {
+	    	desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + ChatColor.RED + "Choose the punishment type");
+		    desccab.add("");
+		    desccab.add("" + ChatColor.WHITE + "Punishment mode: " + ChatColor.YELLOW + flag);
+		    cabecam.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punish: "+punished);
+	    } else {
+	    	desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Escolha o tipo de punição");
+		    desccab.add("");
+		    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + flag);
+		    cabecam.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
+	    }   
 	    cabecam.setOwner(punished);
 	    cabecam.setLore(desccab);
 	    cabeca.setItemMeta(cabecam);
@@ -209,29 +269,51 @@ public class MainPunish implements Listener{
 	    livro = new ItemStack(Material.BOOK_AND_QUILL);
 	    livrom = livro.getItemMeta();
 	    List<String> descpapel = new ArrayList<String>();
-	    descpapel.add("" + ChatColor.AQUA + "Tipo de Punição: " + ChatColor.YELLOW + "Violações de Chat");
-	    descpapel.add("");
-	    descpapel.add("" + ChatColor.GRAY + "Escolha este tipo para punir");
-	    descpapel.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
-	    descpapel.add("" + ChatColor.GRAY + "com base em uma violação de chat");
-	    descpapel.add("");
-	    descpapel.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
+	    if(Main.english) {
+	    	descpapel.add("" + ChatColor.AQUA + "Punishment Type: " + ChatColor.YELLOW + "Chat Violations");
+		    descpapel.add("");
+		    descpapel.add("" + ChatColor.GRAY + "Choose this type to punish");
+		    descpapel.add("" + ChatColor.GRAY + "the player " + ChatColor.RED + punished);
+		    descpapel.add("" + ChatColor.GRAY + "based on a chat violation");
+		    descpapel.add("");
+		    descpapel.add("" + ChatColor.DARK_RED + "A proof " + prova);
+		    livrom.setDisplayName(ChatColor.DARK_GRAY + "Chat Violation");
+	    } else {
+	    	descpapel.add("" + ChatColor.AQUA + "Tipo de Punição: " + ChatColor.YELLOW + "Violações de Chat");
+		    descpapel.add("");
+		    descpapel.add("" + ChatColor.GRAY + "Escolha este tipo para punir");
+		    descpapel.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
+		    descpapel.add("" + ChatColor.GRAY + "com base em uma violação de chat");
+		    descpapel.add("");
+		    descpapel.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
+		    livrom.setDisplayName(ChatColor.DARK_GRAY + "Violação de Chat");
+	    }
 	    livrom.setLore(descpapel);
-	    livrom.setDisplayName("" + ChatColor.DARK_GRAY + "Violação de Chat");
 	    livro.setItemMeta(livrom);
 	    
 	    esp = new ItemStack(Material.DIAMOND_SWORD);
 	    espm = esp.getItemMeta();
 	    List<String> descejec = new ArrayList<String>();
-	    descejec.add("" + ChatColor.AQUA + "Tipo de Punição: " + ChatColor.YELLOW + "Violações de Jogo");
-	    descejec.add("");
-	    descejec.add("" + ChatColor.GRAY + "Escolha este modo para punir");
-	    descejec.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
-	    descejec.add("" + ChatColor.GRAY + "com base em uma violação de jogo");
-	    descejec.add("");
-	    descejec.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
+	    if(Main.english) {
+	    	descejec.add("" + ChatColor.AQUA + "Punishment Type: " + ChatColor.YELLOW + "Game Violations");
+	 	    descejec.add("");
+	 	    descejec.add("" + ChatColor.GRAY + "Choose this type to punish");
+	 	    descejec.add("" + ChatColor.GRAY + "the player " + ChatColor.RED + punished);
+	 	    descejec.add("" + ChatColor.GRAY + "based on a game violation");
+	 	    descejec.add("");
+	 	    descejec.add("" + ChatColor.DARK_RED + "A proof " + prova);
+	 	    espm.setDisplayName(ChatColor.DARK_GRAY + "Game Violation");
+	    } else {
+	    	descejec.add("" + ChatColor.AQUA + "Tipo de Punição: " + ChatColor.YELLOW + "Violações de Jogo");
+	 	    descejec.add("");
+	 	    descejec.add("" + ChatColor.GRAY + "Escolha este tipo para punir");
+	 	    descejec.add("" + ChatColor.GRAY + "o player " + ChatColor.RED + "" + punished);
+	 	    descejec.add("" + ChatColor.GRAY + "com base em uma violação de jogo");
+	 	    descejec.add("");
+	 	    descejec.add("" + ChatColor.DARK_RED + "Uma prova " + prova);
+	 	    espm.setDisplayName(ChatColor.DARK_GRAY + "Violação de Jogo");
+	    }
 	    espm.setLore(descejec);
-	    espm.setDisplayName("" + ChatColor.DARK_GRAY + "Violação de Jogo");
 	    esp.setItemMeta(espm);
 	    
 	    inv.setItem(4, cabeca);
@@ -245,14 +327,26 @@ public class MainPunish implements Listener{
 		flagra = inact;
 		String prova = "";
 		if(inact) {
-			prova = "poderá ser anexada posteriormente!";
+			if(Main.english) {
+				prova = "can be attached later!";
+			} else {
+				prova = "poderá ser anexada posteriormente!";
+			}
 		} else {
-			prova = "deverá ser anexada!";
+			if(Main.english) {
+				prova = "need be attached!";
+			} else {
+				prova = "deve ser anexada!";
+			}
 		}
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 		ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.chatViolations");
 		if(Main.pl.getConfig().get("punishments.chatViolations") == null) {
 			punisher.closeInventory();
+			if(Main.english) {
+				punisher.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED + "No chat violations configured");
+				return;
+			}
 			punisher.sendMessage(ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Não foram encontradas violações de chat configuradas");
 			return;
 		}
@@ -260,34 +354,60 @@ public class MainPunish implements Listener{
 			ItemStack chat = new ItemStack(Material.NETHER_STAR);
 			ItemMeta chatm = chat.getItemMeta();
 			List<String> descchat = new ArrayList<String>();
-			descchat.add(ChatColor.AQUA + "Descrição");
-			descchat.add("");
-			descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
-			descchat.add("");
-			descchat.add(ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
-			descchat.add("");
-			descchat.add(ChatColor.DARK_RED + "Uma prova " + prova);
+			if(Main.english) {
+				descchat.add(ChatColor.AQUA + "Description");
+				descchat.add("");
+				descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
+				descchat.add("");
+				descchat.add(ChatColor.WHITE + "Severity: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
+				descchat.add("");
+				descchat.add(ChatColor.DARK_RED + "A proof " + prova);
+			} else {
+				descchat.add(ChatColor.AQUA + "Descrição");
+				descchat.add("");
+				descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
+				descchat.add("");
+				descchat.add(ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
+				descchat.add("");
+				descchat.add(ChatColor.DARK_RED + "Uma prova " + prova);
+			}
 			chatm.setLore(descchat);
 			chatm.setDisplayName(ChatColor.DARK_GRAY + c.getString(s + ".stname") + " - " + c.getString(s + ".name"));
 			chat.setItemMeta(chatm);
 			items.add(chat);
 		}
-		new ScrollerInventory(items, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished, punisher);
+		String ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished;
+		if(Main.english) {
+			ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + punished;
+		}
+		new ScrollerInventory(items, ninv, punisher);
 	}
 	
 	
 	public static void openTPunishJ(Player punisher, String punished, boolean inact) {
 		String prova = "";
 		if(inact) {
-			prova = "poderá ser anexada posteriormente!";
+			if(Main.english) {
+				prova = "can be attached later!";
+			} else {
+				prova = "poderá ser anexada posteriormente!";
+			}
 		} else {
-			prova = "deverá ser anexada!";
+			if(Main.english) {
+				prova = "need be attached!";
+			} else {
+				prova = "deve ser anexada!";
+			}
 		}
 		
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 		ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.gameViolations");
 		if(Main.pl.getConfig().get("punishments.gameViolations") == null) {
 			punisher.closeInventory();
+			if(Main.english) {
+				punisher.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED + "No game violations configured");
+				return;
+			}
 			punisher.sendMessage(ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Não foram encontradas violações de jogo configuradas");
 			return;
 		}
@@ -295,20 +415,33 @@ public class MainPunish implements Listener{
 			ItemStack chat = new ItemStack(Material.NETHER_STAR);
 			ItemMeta chatm = chat.getItemMeta();
 			List<String> descchat = new ArrayList<String>();
-			descchat.add(ChatColor.AQUA + "Descrição");
-			descchat.add("");
-			descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
-			descchat.add("");
-			descchat.add(ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
-			descchat.add("");
-			descchat.add(ChatColor.DARK_RED + "Uma prova " + prova);
+			if(Main.english) {
+				descchat.add(ChatColor.AQUA + "Description");
+				descchat.add("");
+				descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
+				descchat.add("");
+				descchat.add(ChatColor.WHITE + "Severity: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
+				descchat.add("");
+				descchat.add(ChatColor.DARK_RED + "A proof " + prova);
+			} else {
+				descchat.add(ChatColor.AQUA + "Descrição");
+				descchat.add("");
+				descchat.add(ChatColor.GRAY + c.getString(s + ".description"));
+				descchat.add("");
+				descchat.add(ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + getSev(c.getString(s + ".stname"), punished));
+				descchat.add("");
+				descchat.add(ChatColor.DARK_RED + "Uma prova " + prova);
+			}
 			chatm.setLore(descchat);
 			chatm.setDisplayName(ChatColor.DARK_GRAY + c.getString(s + ".stname") + " - " + c.getString(s + ".name"));
 			chat.setItemMeta(chatm);
 			items.add(chat);
 		}
-		
-		new ScrollerInventory(items, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished, punisher);
+		String ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished;
+		if(Main.english) {
+			ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + punished;
+		}
+		new ScrollerInventory(items, ninv, punisher);
 	}
 	
 	
@@ -318,14 +451,21 @@ public class MainPunish implements Listener{
 		seve = sev;
 		sigla = sig;
 		descr = desc; 
-		
-		Inventory inv = Bukkit.createInventory(null, 9*5, "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished);
+		String ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished;
+		if(Main.english) {
+			ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + punished;
+		}
+		Inventory inv = Bukkit.createInventory(null, 9*5, ninv);
 		String flag = "";
 		String prova2 = "";
 		String sla = "";
 		String tipopun = "";
 		if((tipo.equalsIgnoreCase("chat") || tipo.equalsIgnoreCase("jogo")) && sev <3) {
-			tipopun = "Aviso";
+			if(Main.english) {
+				tipopun = "Warn";
+			} else {
+				tipopun = "Aviso";
+			}
 		}
 		if(tipo.equalsIgnoreCase("chat") && sev > 2) {
 			tipopun = "Mute";
@@ -334,52 +474,99 @@ public class MainPunish implements Listener{
 			tipopun = "Ban";
 		}
 		if(inact) {
-			flag = "Flagrante";
-			sla = "em " + ChatColor.GREEN + "flagrante";
-			prova2 = "poderá ser anexada posteriormente!";
+			if(Main.english) {
+				flag = "In act";
+				sla = "in " + ChatColor.GREEN + "act";
+				prova2 = "can be attached later!";
+			} else {
+				flag = "Flagrante";
+				sla = "em " + ChatColor.GREEN + "flagrante";
+				prova2 = "poderá ser anexada posteriormente!";
+			}
 		} else {
-			flag = "Denúncia";
-			prova2 = "deverá ser anexada!";
-			sla = "com base em uma " + ChatColor.GREEN + "denúncia";
+			if(Main.english) {
+				flag = "Report";
+				sla = "based on a " + ChatColor.GREEN + "report";
+				prova2 = "need be attached!";
+			} else {
+				flag = "Denúncia";
+				sla = "com base em uma " + ChatColor.GREEN + "denúncia";
+				prova2 = "deverá ser anexada!";
+			}
 		}
 		
 		cabeca = new ItemStack(397, 1, (short) 3);
 	    cabecam = (SkullMeta) cabeca.getItemMeta();
 	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "PUNIR: " + ChatColor.RED + "Revisão e punimento");
-	    desccab.add("");
-	    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + "" + flag);
-	    desccab.add("" + ChatColor.WHITE + "Tipo de punição: " + ChatColor.YELLOW + "" + tipopun);
-	    desccab.add("" + ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + "" + sev);
-	    if(sev >0 && sev < 3) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Aviso");
+	    if(Main.english) {
+	    	desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + ChatColor.RED + "Review and conclusion");
+		    desccab.add("");
+		    desccab.add("" + ChatColor.WHITE + "Punishment mode: " + ChatColor.YELLOW + flag);
+		    desccab.add("" + ChatColor.WHITE + "Punishment type: " + ChatColor.YELLOW + tipopun);
+		    desccab.add("" + ChatColor.WHITE + "Severity: " + ChatColor.YELLOW + "" + sev);
+		    if(sev >0 && sev < 3) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "Warn");
+		    }
+		    if(sev >2 && sev < 5 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "2 hours mute");
+		    }
+		    if(sev >2 && sev < 5 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "2 hours ban");
+		    }
+		    if(sev >4 && sev < 8 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "A day mute");
+		    }
+		    if(sev >4 && sev < 8 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "A day ban");
+		    }
+		    if(sev >7 && sev < 10 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "A week mute");
+		    }
+		    if(sev >7 && sev < 10 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "A week ban");
+		    }
+		    if(sev == 10 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "Forever mute");
+		    }
+		    if(sev == 10 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.YELLOW + "Forever ban");
+		    }
+		    cabecam.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punish: "+punished);
+	    } else {
+	    	desccab.add("" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Revisão e conclusão");
+		    desccab.add("");
+		    desccab.add("" + ChatColor.WHITE + "Modo de punição: " + ChatColor.YELLOW + flag);
+		    desccab.add("" + ChatColor.WHITE + "Tipo de punição: " + ChatColor.YELLOW + tipopun);
+		    desccab.add("" + ChatColor.WHITE + "Severidade: " + ChatColor.YELLOW + "" + sev);
+		    if(sev >0 && sev < 3) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Aviso");
+		    }
+		    if(sev >2 && sev < 5 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute de 2 horas");
+		    }
+		    if(sev >2 && sev < 5 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban de 2 horas");
+		    }
+		    if(sev >4 && sev < 8 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute de 24 horas");
+		    }
+		    if(sev >4 && sev < 8 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban de 24 horas");
+		    }
+		    if(sev >7 && sev < 10 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute de 7 dias");
+		    }
+		    if(sev >7 && sev < 10 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban de 7 dias");
+		    }
+		    if(sev == 10 && tipo.equalsIgnoreCase("chat")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute permanente");
+		    }
+		    if(sev == 10 && tipo.equalsIgnoreCase("jogo")) {
+		    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban permanente");
+		    }
+		    cabecam.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
 	    }
-	    if(sev >2 && sev < 5 && tipo.equalsIgnoreCase("chat")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute de 2 horas");
-	    }
-	    if(sev >2 && sev < 5 && tipo.equalsIgnoreCase("jogo")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban de 2 horas");
-	    }
-	    if(sev >4 && sev < 8 && tipo.equalsIgnoreCase("chat")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute de 24 horas");
-	    }
-	    if(sev >4 && sev < 8 && tipo.equalsIgnoreCase("jogo")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban de 24 horas");
-	    }
-	    if(sev >7 && sev < 10 && tipo.equalsIgnoreCase("chat")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute de 7 dias");
-	    }
-	    if(sev >7 && sev < 10 && tipo.equalsIgnoreCase("jogo")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban de 7 dias");
-	    }
-	    if(sev == 10 && tipo.equalsIgnoreCase("chat")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Mute permanente");
-	    }
-	    if(sev == 10 && tipo.equalsIgnoreCase("jogo")) {
-	    	desccab.add("" + ChatColor.WHITE + "Punição dada: " + ChatColor.YELLOW + "Ban permanente");
-	    }
-	    
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: "+punished);
 	    cabecam.setOwner(punished);
 	    cabecam.setLore(desccab);
 	    cabeca.setItemMeta(cabecam);
@@ -387,62 +574,109 @@ public class MainPunish implements Listener{
 	    flagr = new ItemStack(Material.DISPENSER);
 	    flagrm = flagr.getItemMeta();
 	    List<String> descflagr = new ArrayList<String>();
-	    descflagr.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Flagrante");
-	    descflagr.add("");
-	    descflagr.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + "" + punished);
-	    descflagr.add("" + ChatColor.GRAY + "em flagrante");
-	    descflagr.add("");
-	    descflagr.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
-	    descflagr.add("");
-	    descflagr.add("" + ChatColor.YELLOW + "Clique para alterar para o modo " + ChatColor.AQUA + "denúncia");
+	    if(Main.english) {
+	    	descflagr.add("" + ChatColor.AQUA + "Punishment mode: " + ChatColor.YELLOW + "In act");
+		    descflagr.add("");
+		    descflagr.add("" + ChatColor.GRAY + "You're punishing the player " + ChatColor.RED + punished);
+		    descflagr.add("" + ChatColor.GRAY + "in act");
+		    descflagr.add("");
+		    descflagr.add("" + ChatColor.DARK_RED + "A proof " + prova2);
+		    descflagr.add("");
+		    descflagr.add("" + ChatColor.YELLOW + "Click to change the mode to " + ChatColor.AQUA + "report");
+		    flagrm.setDisplayName(ChatColor.DARK_GRAY + "In act");
+	    } else {
+	    	descflagr.add("" + ChatColor.AQUA + "Modo de punição: " + ChatColor.YELLOW + "Flagrante");
+		    descflagr.add("");
+		    descflagr.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + punished);
+		    descflagr.add("" + ChatColor.GRAY + "em flagrante");
+		    descflagr.add("");
+		    descflagr.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
+		    descflagr.add("");
+		    descflagr.add("" + ChatColor.YELLOW + "Clique para alterar para o modo " + ChatColor.AQUA + "denúncia");
+		    flagrm.setDisplayName(ChatColor.DARK_GRAY + "Flagrante");
+	    }
 	    flagrm.setLore(descflagr);
-	    flagrm.setDisplayName("" + ChatColor.DARK_GRAY + "Flagrante");
 	    flagr.setItemMeta(flagrm);
 	    
 	    denun = new ItemStack(Material.PAPER);
 	    denunm = denun.getItemMeta();
 	    List<String> descdenun = new ArrayList<String>();
-	    descdenun.add("" + ChatColor.AQUA + "Modo de Punição: " + ChatColor.YELLOW + "Denúncia");
-	    descdenun.add("");
-	    descdenun.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + "" + punished);
-	    descdenun.add("" + ChatColor.GRAY + "com base em uma denúncia");
-	    descdenun.add("");
-	    descdenun.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
-	    descdenun.add("");
-	    descdenun.add("" + ChatColor.YELLOW + "Clique para alterar para o modo " + ChatColor.AQUA + "flagrante");
+	    if(Main.english) {
+	    	descdenun.add("" + ChatColor.AQUA + "Punishment mode: " + ChatColor.YELLOW + "Report");
+		    descdenun.add("");
+		    descdenun.add("" + ChatColor.GRAY + "You're punishing the player " + ChatColor.RED + punished);
+		    descdenun.add("" + ChatColor.GRAY + "based on a report");
+		    descdenun.add("");
+		    descdenun.add("" + ChatColor.DARK_RED + "A proof " + prova2);
+		    descdenun.add("");
+		    descdenun.add("" + ChatColor.YELLOW + "Click to change the mode to " + ChatColor.AQUA + "in act");
+		    denunm.setDisplayName(ChatColor.DARK_GRAY + "Report");
+	    } else {
+	    	descdenun.add("" + ChatColor.AQUA + "Modo de punição: " + ChatColor.YELLOW + "Denúncia");
+		    descdenun.add("");
+		    descdenun.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + punished);
+		    descdenun.add("" + ChatColor.GRAY + "com base em uma denúncia");
+		    descdenun.add("");
+		    descdenun.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
+		    descdenun.add("");
+		    descdenun.add("" + ChatColor.YELLOW + "Clique para alterar para o modo " + ChatColor.AQUA + "flagrante");
+		    denunm.setDisplayName(ChatColor.DARK_GRAY + "Denúncia");
+	    }
+	    
 	    denunm.setLore(descdenun);
-	    denunm.setDisplayName("" + ChatColor.DARK_GRAY + "Denúncia");
 	    denun.setItemMeta(denunm);
 	    
 	    prova = new ItemStack(Material.ITEM_FRAME);
 	    provam = prova.getItemMeta();
 	    List<String> descprova = new ArrayList<String>();
-	    descprova.add("" + ChatColor.AQUA + "Anexo de prova");
-	    descprova.add("");
-	    descprova.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + "" + punished);
-	    descprova.add("" + ChatColor.GRAY + "" + sla);
-	    descprova.add("");
-	    descprova.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
-	    descprova.add("");
-	    descprova.add("" + ChatColor.YELLOW + "Clique para anexar uma prova");
+	    if(Main.english) {
+	    	descprova.add("" + ChatColor.AQUA + "Proof attachment");
+		    descprova.add("");
+		    descprova.add("" + ChatColor.GRAY + "You're punishing the player " + ChatColor.RED +  punished);
+		    descprova.add("" + ChatColor.GRAY + sla);
+		    descprova.add("");
+		    descprova.add("" + ChatColor.DARK_RED + "A proof " + prova2);
+		    descprova.add("");
+		    descprova.add("" + ChatColor.YELLOW + "Click to attach a proof");
+		    provam.setDisplayName(ChatColor.DARK_GRAY + "Attach a proof");
+	    } else {
+	    	descprova.add("" + ChatColor.AQUA + "Anexo de prova");
+		    descprova.add("");
+		    descprova.add("" + ChatColor.GRAY + "Você está punindo o player " + ChatColor.RED + punished);
+		    descprova.add("" + ChatColor.GRAY + sla);
+		    descprova.add("");
+		    descprova.add("" + ChatColor.DARK_RED + "Uma prova " + prova2);
+		    descprova.add("");
+		    descprova.add("" + ChatColor.YELLOW + "Clique para anexar uma prova");
+		    provam.setDisplayName(ChatColor.DARK_GRAY + "Anexar uma Prova");
+	    } 
 	    provam.setLore(descprova);
-	    provam.setDisplayName("" + ChatColor.DARK_GRAY + "Anexar uma Prova");
 	    prova.setItemMeta(provam);
 	    
 	    conf = new ItemStack(Material.STAINED_CLAY, 1, (short) 4);
 	    confm = conf.getItemMeta();
 	    desccab.add("");
-	    desccab.add("" + ChatColor.GREEN + "Clique para punir");
+	    if(Main.english) {
+	    	desccab.add("" + ChatColor.GREEN + "Click to punish");
+	    	confm.setDisplayName(ChatColor.DARK_GRAY + "Clique to punish " + ChatColor.AQUA + punished + " " + ChatColor.DARK_GRAY + sla);
+	    } else {
+	    	desccab.add("" + ChatColor.GREEN + "Clique para punir");
+	    	confm.setDisplayName(ChatColor.DARK_GRAY + "Clique para punir " + ChatColor.AQUA + punished + " " + ChatColor.DARK_GRAY + sla);
+	    }
 	    confm.setLore(desccab);
-	    confm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para punir " + ChatColor.AQUA + "" + punished + " " + ChatColor.DARK_GRAY + "" + sla);
 	    conf.setItemMeta(confm);
 	    
 	    canc = new ItemStack(Material.STAINED_CLAY, 1, (short) 14);
 	    cancm = canc.getItemMeta();
 	    List<String> desccanc = new ArrayList<String>();
-	    desccanc.add("" + ChatColor.RED + "Clique para cancelar a punição e sair do inventário");
+	    if(Main.english) {
+	    	desccanc.add("" + ChatColor.RED + "Click to cancel the punishment and close the inventory");
+		    cancm.setDisplayName(ChatColor.DARK_GRAY + "Click to cancel the punishment");
+	    } else {
+	    	desccanc.add("" + ChatColor.RED + "Clique para cancelar a punição e sair do inventário");
+		    cancm.setDisplayName(ChatColor.DARK_GRAY + "Clique para cancelar a punição");
+	    }
 	    cancm.setLore(desccanc);
-	    cancm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para cancelar a punição");
 	    canc.setItemMeta(cancm);
 	    
 	    inv.setItem(4, cabeca);
@@ -476,15 +710,26 @@ public class MainPunish implements Listener{
 
 	@SuppressWarnings("deprecation")
 	public static void openEditPunish(Player punisher, String punished) throws SQLException {
-		Inventory inv = Bukkit.createInventory(null, 9*3, "" + ChatColor.DARK_RED + "Punições: " + ChatColor.RED + punished);
+		String ninv = "" + ChatColor.DARK_RED + "Punições de: " + ChatColor.RED + punished;
+		if(Main.english) {
+			ninv = "" + ChatColor.DARK_RED + punished + ChatColor.RED + "'s punishments";
+		}
+		Inventory inv = Bukkit.createInventory(null, 9*3, ninv);
 		
 		cabeca = new ItemStack(397, 1, (short) 3);
 	    cabecam = (SkullMeta) cabeca.getItemMeta();
 	    List<String> desccab = new ArrayList<String>();
-	    desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Escolha a violação para");
-	    desccab.add("" + ChatColor.RED + "editar a punição.");
-	    desccab.add("");
-	    cabecam.setDisplayName("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punições de: "+punished);
+	    if(Main.english) {
+	    	desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punish: " + ChatColor.RED + "Choose some violation to");
+		    desccab.add("" + ChatColor.RED + "edit the punishment.");
+		    desccab.add("");
+		    cabecam.setDisplayName(ChatColor.DARK_RED + punished + ChatColor.RED + "'s punishments");
+	    } else {
+	    	desccab.add("" + ChatColor.DARK_RED + "" + ChatColor.BOLD + "Punir: " + ChatColor.RED + "Escolha a violação para");
+		    desccab.add("" + ChatColor.RED + "editar a punição.");
+		    desccab.add("");
+		    cabecam.setDisplayName(ChatColor.DARK_RED + "Punições de: " + ChatColor.RED + punished);
+	    }
 	    cabecam.setOwner(punished);
 	    cabecam.setLore(desccab);
 	    cabeca.setItemMeta(cabecam);
@@ -492,20 +737,32 @@ public class MainPunish implements Listener{
 	    pjogo = new ItemStack(Material.DIAMOND_SWORD);
 	    pjogom = pjogo.getItemMeta();
 	    List<String> descpjogo = new ArrayList<String>();
-	    descpjogo.add("" + ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "" + punished + " recebeu um total de " + ChatColor.YELLOW + "" + getTotal(punished, 2));
-	    descpjogo.add("" + ChatColor.RED + "punições de jogo. Clique aqui para edita-la(s)");
+	    if(Main.english) {
+	    	descpjogo.add("" + ChatColor.DARK_RED + "Punish> " + ChatColor.RED + punished + " received a total of " + ChatColor.YELLOW + getTotal(punished, 2));
+		    descpjogo.add("" + ChatColor.RED + "game punishments. Click here to edit it");
+		    pjogom.setDisplayName(ChatColor.DARK_GRAY + "Game Violations");
+	    } else {
+	    	descpjogo.add("" + ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "" + punished + " recebeu um total de " + ChatColor.YELLOW + "" + getTotal(punished, 2));
+		    descpjogo.add("" + ChatColor.RED + "punições de jogo. Clique aqui para edita-la(s)");
+		    pjogom.setDisplayName(ChatColor.DARK_GRAY + "Violações de Jogo");
+	    }    
 	    pjogom.setLore(descpjogo);
-	    pjogom.setDisplayName("" + ChatColor.DARK_GRAY + "Violações de Jogo");
 	    pjogo.setAmount(getTotal(punished, 2));
 	    pjogo.setItemMeta(pjogom);
 	    
 	    pchat = new ItemStack(Material.BOOK_AND_QUILL);
 	    pchatm = pchat.getItemMeta();
 	    List<String> descpchat = new ArrayList<String>();
-	    descpchat.add("" + ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "" + punished + " recebeu um total de " + ChatColor.YELLOW + "" + getTotal(punished, 1));
-	    descpchat.add("" + ChatColor.RED + "punições de chat. Clique aqui para edita-la(s)");
+	    if(Main.english) {
+	    	descpchat.add("" + ChatColor.DARK_RED + "Punish> " + ChatColor.RED + punished + " received a total of " + ChatColor.YELLOW + getTotal(punished, 1));
+		    descpchat.add("" + ChatColor.RED + "chat punishments. Click to edit it");
+		    pchatm.setDisplayName(ChatColor.DARK_GRAY + "Chat Violations");
+	    } else {
+	    	descpchat.add("" + ChatColor.DARK_RED + "Punir> " + ChatColor.RED + punished + " recebeu um total de " + ChatColor.YELLOW + getTotal(punished, 1));
+		    descpchat.add("" + ChatColor.RED + "punições de chat. Clique aqui para edita-la(s)");
+		    pchatm.setDisplayName(ChatColor.DARK_GRAY + "Violações de Chat");
+	    }
 	    pchatm.setLore(descpchat);
-	    pchatm.setDisplayName("" + ChatColor.DARK_GRAY + "Violações de Chat");
 	    pchat.setAmount(getTotal(punished, 1));
 	    pchat.setItemMeta(pchatm);
 	    
@@ -518,59 +775,113 @@ public class MainPunish implements Listener{
 	}
 	
 	public void editarPunicao(Player punisher, String punished, int modo) throws SQLException {
-		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-		
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();	
 		Statement s = Main.c.createStatement();
 		ResultSet res = s.executeQuery("SELECT * FROM punish WHERE Nome = '" + punished + "' AND Modo=" + modo+ ";");
 		while(res.next()) {
 			String modos = "";
 			if(res.getInt("Modo") == 1) {
-				modos = "Violação de Chat";
+				if(Main.english) {
+					modos = "Chat Violation";
+				} else {
+					modos = "Violação de Chat";
+				}
 			}
 			if(res.getInt("Modo") == 2) {
-				modos = "Violação de Jogo";
+				if(Main.english) {
+					modos = "Game Violation";
+				} else {
+					modos = "Violação de Jogo";
+				}
 			}
-			String flag = "Não";
-			if(res.getBoolean("Tipo")) {
-				flag = "Sim";
+			String flag = "";
+			if(Main.english) {
+				if(res.getBoolean("Tipo")) {
+					flag = "Yes";
+				} else {
+					flag = "No";
+				}
+			} else {
+				if(res.getBoolean("Tipo")) {
+					flag = "Sim";
+				} else {
+					flag = "Não";
+				}
 			}
-			String expira = "Não";
+			String expira = "";
+			if(Main.english) {
+				expira = "No";
+			} else {
+				expira = "Não";
+			}
 			Date data1 = new Date(res.getLong("Inicio"));
 			SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyy HH:mm:ss");
 			if(res.getInt("Sev") != 10 && res.getInt("Sev") > 2) {
 				Date data2 = new Date(res.getLong("Fim"));
 				expira = sf.format(data2);
 			}
-			String cancel = "Não";
-			if(res.getBoolean("Cancelado")) {
-				cancel = "Sim";
+			String cancel = "";
+			if(Main.english) {
+				if(res.getBoolean("Cancelado")) {
+					cancel = "Yes";
+				} else {
+					cancel = "No";
+				}
+			} else {
+				if(res.getBoolean("Cancelado")) {
+					cancel = "Sim";
+				} else {
+					cancel = "Não";
+				}
 			}
-			
+				
 			ItemStack punicao = new ItemStack(Material.DIAMOND_SPADE);
 			ItemMeta punicaom = punicao.getItemMeta();
 			List<String> dp = new ArrayList<String>();
-			dp.add("" + ChatColor.WHITE + "Punição: " + ChatColor.DARK_RED + "" + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + "" + getName(res.getString("Sigla")));
-			dp.add("" + ChatColor.WHITE + "Jogador: " + punished);
-			dp.add("" + ChatColor.WHITE + "UUID: " + res.getString("UUID"));
-			dp.add("" + ChatColor.WHITE + "IP: " + res.getString("IP"));
-			dp.add("" + ChatColor.WHITE + "Severidade: " + res.getInt("Sev"));
-			dp.add("" + ChatColor.WHITE + "Tipo: " + modos);
-			dp.add("" + ChatColor.WHITE + "Flagrante: " + flag);
-			dp.add("" + ChatColor.WHITE + "Ativada: " + sf.format(data1));
-			dp.add("" + ChatColor.WHITE + "Expira: " + expira);
-			dp.add("" + ChatColor.WHITE + "Cancelado: " + cancel);
-			if(cancel.equalsIgnoreCase("Sim")) {dp.add("" + ChatColor.WHITE + "Cancelado por: " + res.getString("CancelBy")); }
-			dp.add("" + ChatColor.WHITE + "Prova: " + res.getString("Prova"));
-			dp.add("" + ChatColor.WHITE + "Staff: " + res.getString("Staff"));
-			dp.add("");
-			dp.add("" + ChatColor.YELLOW + "Clique para editar ou cancelar a punição");
+			if(Main.english) {
+				dp.add("" + ChatColor.WHITE + "Punishment: " + ChatColor.DARK_RED + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + getName(res.getString("Sigla")));
+				dp.add("" + ChatColor.WHITE + "Player: " + punished);
+				dp.add("" + ChatColor.WHITE + "UUID: " + res.getString("UUID"));
+				dp.add("" + ChatColor.WHITE + "IP: " + res.getString("IP"));
+				dp.add("" + ChatColor.WHITE + "Severity: " + res.getInt("Sev"));
+				dp.add("" + ChatColor.WHITE + "Type: " + modos);
+				dp.add("" + ChatColor.WHITE + "In act: " + flag);
+				dp.add("" + ChatColor.WHITE + "Activated: " + sf.format(data1));
+				dp.add("" + ChatColor.WHITE + "Expires: " + expira);
+				dp.add("" + ChatColor.WHITE + "Cancelled: " + cancel);
+				if(cancel.equalsIgnoreCase("Yes")) {dp.add("" + ChatColor.WHITE + "Cancelled by: " + res.getString("CancelBy")); }
+				dp.add("" + ChatColor.WHITE + "Proof: " + res.getString("Prova"));
+				dp.add("" + ChatColor.WHITE + "Staff: " + res.getString("Staff"));
+				dp.add("");
+				dp.add("" + ChatColor.YELLOW + "Click to edit or cancel the punishment");
+			} else {
+				dp.add("" + ChatColor.WHITE + "Punição: " + ChatColor.DARK_RED + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + getName(res.getString("Sigla")));
+				dp.add("" + ChatColor.WHITE + "Jogador: " + punished);
+				dp.add("" + ChatColor.WHITE + "UUID: " + res.getString("UUID"));
+				dp.add("" + ChatColor.WHITE + "IP: " + res.getString("IP"));
+				dp.add("" + ChatColor.WHITE + "Severidade: " + res.getInt("Sev"));
+				dp.add("" + ChatColor.WHITE + "Tipo: " + modos);
+				dp.add("" + ChatColor.WHITE + "Flagrante: " + flag);
+				dp.add("" + ChatColor.WHITE + "Ativada: " + sf.format(data1));
+				dp.add("" + ChatColor.WHITE + "Expira: " + expira);
+				dp.add("" + ChatColor.WHITE + "Cancelado: " + cancel);
+				if(cancel.equalsIgnoreCase("Sim")) {dp.add("" + ChatColor.WHITE + "Cancelado por: " + res.getString("CancelBy")); }
+				dp.add("" + ChatColor.WHITE + "Prova: " + res.getString("Prova"));
+				dp.add("" + ChatColor.WHITE + "Staff: " + res.getString("Staff"));
+				dp.add("");
+				dp.add("" + ChatColor.YELLOW + "Clique para editar ou cancelar a punição");
+			}	
 			punicaom.setLore(dp);
-			punicaom.setDisplayName("" + ChatColor.DARK_GRAY + "" + res.getInt("id"));
+			punicaom.setDisplayName(ChatColor.DARK_GRAY + "" +  res.getInt("id"));
 			punicao.setItemMeta(punicaom);
 			
 			items.add(punicao);
 		}
-		new ScrollerInventory(items, "" + ChatColor.DARK_RED + "Violações", punisher);
+		String ninv = ChatColor.DARK_RED + "Violações";
+		if(Main.english) {
+			ninv = "Violations";
+		}
+		new ScrollerInventory(items, ninv , punisher);
 		
 	}
 	
@@ -581,47 +892,82 @@ public class MainPunish implements Listener{
 		
 		res.next();
 		flpun = res.getBoolean("Tipo");
-		String vi = "chat";
+		String vi = "";
 		if(res.getInt("Modo") == 1) {
 			tpun = new ItemStack(Material.BOOK_AND_QUILL);
+			if(Main.english) {
+				vi = "Chat"; 
+			} else {
+				vi = "chat";
+			}
 		} else {
 			tpun = new ItemStack(Material.DIAMOND_SWORD);
-			vi = "jogo";
+			if(Main.english) {
+				vi = "Game"; 
+			} else {
+				vi = "jogo";
+			}
 		}
 		tpunm = tpun.getItemMeta();
 		List<String> dt = new ArrayList<String>();
-		dt.add("" + ChatColor.DARK_RED + "Punição> " + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + "" + getName(res.getString("Sigla")));
-		dt.add("" + ChatColor.YELLOW + "" + res.getString("Desc"));
-		tpunm.setDisplayName("" + ChatColor.DARK_GRAY + "Violação de " + vi);
+		if(Main.english) {
+			dt.add("" + ChatColor.DARK_RED + "Punishment> " + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + getName(res.getString("Sigla")));
+			dt.add("" + ChatColor.YELLOW + "" + res.getString("Desc"));
+			tpunm.setDisplayName(ChatColor.DARK_GRAY + vi + " violation");
+		} else {
+			dt.add("" + ChatColor.DARK_RED + "Punição> " + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + getName(res.getString("Sigla")));
+			dt.add("" + ChatColor.YELLOW + "" + res.getString("Desc"));
+			tpunm.setDisplayName(ChatColor.DARK_GRAY + "Violação de " + vi);
+		}
 		tpunm.setLore(dt);
 		tpun.setItemMeta(tpunm);
 		
 		cpun = new ItemStack(Material.REDSTONE_BLOCK);
 		cpunm = cpun.getItemMeta();
-		cpunm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para cancelar a punição");
+		if(Main.english) {
+			cpunm.setDisplayName(ChatColor.DARK_GRAY + "Click to cancel the punishment");
+		} else {
+			cpunm.setDisplayName(ChatColor.DARK_GRAY + "Clique para cancelar a punição");
+		}
 		cpun.setItemMeta(cpunm);
 		
 		spun = new ItemStack(Material.STAINED_CLAY, 1, (short)5);
 		spunm = spun.getItemMeta();
-		spunm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para salvar as alterações na punição");
+		if(Main.english) {
+			spunm.setDisplayName(ChatColor.DARK_GRAY + "Click to save the punishment's changes");
+		} else {
+			spunm.setDisplayName(ChatColor.DARK_GRAY + "Clique para salvar as alterações na punição");
+		}
 		spun.setItemMeta(spunm);
 		
 		sepun = new ItemStack(Material.REDSTONE_TORCH_ON);
 		sepunm = sepun.getItemMeta();
 		List<String> saa = new ArrayList<String>();
-		saa.add("" + ChatColor.WHITE + "Severidade atual: " + res.getInt("Sev"));
-		saa.add("" + ChatColor.WHITE + "Nova severidade: " + seve);
+		if(Main.english) {
+			saa.add("" + ChatColor.WHITE + "Current severity: " + res.getInt("Sev"));
+			saa.add("" + ChatColor.WHITE + "New severity: " + seve);
+			sepunm.setDisplayName(ChatColor.DARK_GRAY + "Click to change the severity");
+		} else {
+			saa.add("" + ChatColor.WHITE + "Severidade atual: " + res.getInt("Sev"));
+			saa.add("" + ChatColor.WHITE + "Nova severidade: " + seve);
+			sepunm.setDisplayName(ChatColor.DARK_GRAY + "Clique para alterar a severidade");
+		}
 		sepunm.setLore(saa);
-		sepunm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para alterar a severidade");
 		sepun.setItemMeta(sepunm);
 		
 		ppun = new ItemStack(Material.ITEM_FRAME);
 		ppunm = ppun.getItemMeta();
 		List<String> sa = new ArrayList<String>();
-		sa.add("" + ChatColor.WHITE + "Prova atual: " + res.getString("Prova"));
-		sa.add("" + ChatColor.WHITE + "Nova prova: " + provaa);
-		ppunm.setLore(sa);
-		ppunm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para anexar/editar a prova");
+		if(Main.english) {
+			sa.add("" + ChatColor.WHITE + "Current proof: " + res.getString("Prova"));
+			sa.add("" + ChatColor.WHITE + "New proof: " + provaa);
+			ppunm.setDisplayName(ChatColor.DARK_GRAY + "Click to attach/edit the proof");
+		} else {
+			sa.add("" + ChatColor.WHITE + "Prova atual: " + res.getString("Prova"));
+			sa.add("" + ChatColor.WHITE + "Nova prova: " + provaa);
+			ppunm.setDisplayName(ChatColor.DARK_GRAY + "Clique para anexar/editar a prova");
+		}
+		ppunm.setLore(sa);	
 		ppun.setItemMeta(ppunm);
 		
 		if(fla != "") {
@@ -638,17 +984,29 @@ public class MainPunish implements Listener{
 			}
 		}
 		fpunm = fpun.getItemMeta();
-		fpunm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para alternar entre o modo flagrante/denúncia");
+		if(Main.english) {
+			fpunm.setDisplayName(ChatColor.DARK_GRAY + "Click to toggle between in act/report");
+		} else {
+			fpunm.setDisplayName(ChatColor.DARK_GRAY + "Clique para alternar entre o modo flagrante/denúncia");
+		}
 		fpun.setItemMeta(fpunm);
 		
 		sair = new ItemStack(Material.IRON_DOOR);
 		sairm = sair.getItemMeta();
-		sairm.setDisplayName("" + ChatColor.DARK_GRAY + "Clique para sair da edição");
+		if(Main.english) {
+			sairm.setDisplayName(ChatColor.DARK_GRAY + "Click to leave to the inventory");
+		} else {
+			sairm.setDisplayName(ChatColor.DARK_GRAY + "Clique para sair da edição");
+		}
 		sair.setItemMeta(sairm);
 		
 		excluir = new ItemStack(Material.BARRIER);
 		excluirm = excluir.getItemMeta();
-		excluirm.setDisplayName("" + ChatColor.DARK_GRAY + "Excluir punição do Banco de Dados");
+		if(Main.english) {
+			excluirm.setDisplayName(ChatColor.DARK_GRAY + "Delete the punishment of the database");
+		} else {
+			excluirm.setDisplayName(ChatColor.DARK_GRAY + "Excluir punição do Banco de Dados");
+		}
 		excluir.setItemMeta(excluirm);
 		
 		inv.setItem(4, tpun);
@@ -676,56 +1034,100 @@ public class MainPunish implements Listener{
 	}
 	
 	public static void eSev(Player p) {
-		Inventory inv = Bukkit.createInventory(null, 9*5, "" + ChatColor.DARK_RED + "Editar Severidade");
+		String ninv = "" + ChatColor.DARK_RED + "Editar Severidade";
+		if(Main.english) {
+			ninv = "" + ChatColor.DARK_RED + "Edit Severity";
+		}
+		Inventory inv = Bukkit.createInventory(null, 9*5, ninv);
 		
 		sev1 = new ItemStack(Material.STAINED_CLAY, 1, (short)2);
 		sev1m = sev1.getItemMeta();
-		sev1m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 1");
+		if(Main.english) {
+			sev1m.setDisplayName(ChatColor.DARK_GRAY + "Severity 1");
+		} else {
+			sev1m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 1");
+		}
 		sev1.setItemMeta(sev1m);
 		
 		sev2 = new ItemStack(Material.STAINED_CLAY, 2, (short)10);
 		sev2m = sev2.getItemMeta();
-		sev2m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 2");
+		if(Main.english) {
+			sev2m.setDisplayName(ChatColor.DARK_GRAY + "Severity 2");
+		} else {
+			sev2m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 2");
+		}
 		sev2.setItemMeta(sev2m);
 		
 		sev3 = new ItemStack(Material.STAINED_CLAY, 3, (short)3);
 		sev3m = sev3.getItemMeta();
-		sev3m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 3");
+		if(Main.english) {
+			sev3m.setDisplayName(ChatColor.DARK_GRAY + "Severity 3");
+		} else {
+			sev3m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 3");
+		}
 		sev3.setItemMeta(sev3m);
 		
 		sev4 = new ItemStack(Material.STAINED_CLAY, 4, (short)11);
 		sev4m = sev4.getItemMeta();
-		sev4m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 4");
+		if(Main.english) {
+			sev4m.setDisplayName(ChatColor.DARK_GRAY + "Severit 4");
+		} else {
+			sev4m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 4");
+		}
 		sev4.setItemMeta(sev4m);
 		
 		sev5 = new ItemStack(Material.STAINED_CLAY, 5, (short)5);
 		sev5m = sev5.getItemMeta();
-		sev5m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 5");
+		if(Main.english) {
+			sev5m.setDisplayName(ChatColor.DARK_GRAY + "Severity 5");
+		} else {
+			sev5m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 5");
+		}
 		sev5.setItemMeta(sev5m);
 		
 		sev6 = new ItemStack(Material.STAINED_CLAY, 6, (short)13);
 		sev6m = sev6.getItemMeta();
-		sev6m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 6");
+		if(Main.english) {
+			sev6m.setDisplayName(ChatColor.DARK_GRAY + "Severity 6");
+		} else {
+			sev6m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 6");
+		}
 		sev6.setItemMeta(sev6m);
 		
 		sev7 = new ItemStack(Material.STAINED_CLAY, 7, (short)4);
 		sev7m = sev7.getItemMeta();
-		sev7m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 7");
+		if(Main.english) {
+			sev7m.setDisplayName(ChatColor.DARK_GRAY + "Severity 7");
+		} else {
+			sev7m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 7");
+		}
 		sev7.setItemMeta(sev7m);
 		
 		sev8 = new ItemStack(Material.STAINED_CLAY, 8, (short)1);
 		sev8m = sev8.getItemMeta();
-		sev8m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 8");
+		if(Main.english) {
+			sev8m.setDisplayName(ChatColor.DARK_GRAY + "Severity 8");
+		} else {
+			sev8m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 8");
+		}
 		sev8.setItemMeta(sev8m);
 		
 		sev9 = new ItemStack(Material.STAINED_CLAY, 9, (short)14);
 		sev9m = sev9.getItemMeta();
-		sev9m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 9");
+		if(Main.english) {
+			sev9m.setDisplayName(ChatColor.DARK_GRAY + "Severity 9");
+		} else {
+			sev9m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 9");
+		}
 		sev9.setItemMeta(sev9m);
 		
 		sev10 = new ItemStack(Material.REDSTONE_BLOCK, 10);
 		sev10m = sev10.getItemMeta();
-		sev10m.setDisplayName("" + ChatColor.DARK_GRAY + "Severidade 10");
+		if(Main.english) {
+			sev10m.setDisplayName(ChatColor.DARK_GRAY + "Severity 10");
+		} else {
+			sev10m.setDisplayName(ChatColor.DARK_GRAY + "Severidade 10");
+		}
 		sev10.setItemMeta(sev10m);
 		
 		inv.setItem(2, sev1);
@@ -789,7 +1191,11 @@ public class MainPunish implements Listener{
 					e.setCancelled(true);
 					eprova.add(p.getName());
 					p.closeInventory();
-					p.sendMessage("" + ChatColor.BLUE + "Editar Punição> " + ChatColor.GRAY + "Digite o link da prova no chat. O inventário será aberto em seguida.");
+					if(Main.english) {
+						p.sendMessage(ChatColor.BLUE + "Edit Punishment> " + ChatColor.GRAY + "Type the proof link in the chat. The inventory will then open.");
+						return;
+					}
+					p.sendMessage(ChatColor.BLUE + "Editar Punição> " + ChatColor.GRAY + "Digite o link da prova no chat. O inventário será aberto em seguida.");
 					return;
 				}
 				if(e.getCurrentItem().isSimilar(sair)) {
@@ -858,10 +1264,14 @@ public class MainPunish implements Listener{
 					}
 					Statement s = Main.c.createStatement();
 					s.execute("UPDATE punish SET" + prova + sev + fim + sla + " WHERE id=" + editando.get(p.getName()) + ";");
-					p.sendMessage("" + ChatColor.BLUE + "Editar Punição> A punição foi editada com sucesso.");
 					fla = "";
 					s.close();
 					editando.remove(p.getName());
+					if(Main.english) {
+						p.sendMessage(ChatColor.BLUE + "Edit Punishment> The punishment was edited successful.");
+						return;
+					}
+					p.sendMessage(ChatColor.BLUE + "Editar Punição> A punição foi editada com sucesso.");
 					return;
 				}
 				if(e.getCurrentItem().isSimilar(cpun)) {
@@ -869,12 +1279,20 @@ public class MainPunish implements Listener{
 					p.closeInventory();
 					Statement s = Main.c.createStatement();
 					s.execute("UPDATE punish SET Cancelado=1, CancelBy='" + p.getName() + "' WHERE id=" + editando.get(p.getName()) + ";");
-					p.sendMessage("" + ChatColor.BLUE + "Cancelar Punição> " + ChatColor.GRAY + "A punição " + ChatColor.RED + "" + editando.get(p.getName()) + " " + ChatColor.GRAY + "foi cancelada com sucesso");
 					ResultSet res = s.executeQuery("SELECT * FROM punish WHERE id=" + editando.get(p.getName()) + ";");
 					res.next();
-					if(Bukkit.getPlayer(res.getString("Nome")) instanceof Player) {
-						Player a = Bukkit.getPlayer(res.getString("Nome"));
-						a.sendMessage("" + ChatColor.BLUE + "Punição> " + ChatColor.GOLD + "Sua punição " + ChatColor.DARK_RED + "" + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + "" + getName(res.getString("Sigla")) + " " + ChatColor.GOLD + "foi cancelada por um administrador.");
+					if(Main.english) {
+						p.sendMessage(ChatColor.BLUE + "Cancel Punishment> " + ChatColor.GRAY + "The punishment " + ChatColor.RED + editando.get(p.getName()) + " " + ChatColor.GRAY + "was cancelled successful.");
+						if(Bukkit.getPlayer(res.getString("Nome")) instanceof Player) {
+							Player a = Bukkit.getPlayer(res.getString("Nome"));
+							a.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.GOLD + "Your punishment " + ChatColor.DARK_RED + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + getName(res.getString("Sigla")) + " " + ChatColor.GOLD + "was cancelled by an administrator.");
+						}
+					} else {
+						p.sendMessage(ChatColor.BLUE + "Cancelar Punição> " + ChatColor.GRAY + "A punição " + ChatColor.RED + "" + editando.get(p.getName()) + " " + ChatColor.GRAY + "foi cancelada com sucesso");
+						if(Bukkit.getPlayer(res.getString("Nome")) instanceof Player) {
+							Player a = Bukkit.getPlayer(res.getString("Nome"));
+							a.sendMessage(ChatColor.BLUE + "Punição> " + ChatColor.GOLD + "Sua punição " + ChatColor.DARK_RED + "" + res.getString("Sigla") + "#" + res.getInt("id") + ": " + ChatColor.RED + "" + getName(res.getString("Sigla")) + " " + ChatColor.GOLD + "foi cancelada por um administrador.");
+						}
 					}
 					fla = "";
 					return;
@@ -884,7 +1302,11 @@ public class MainPunish implements Listener{
 					p.closeInventory();
 					Statement s = Main.c.createStatement();
 					s.execute("DELETE FROM punish WHERE id=" + editando.get(p.getName()));
-					p.sendMessage("" + ChatColor.BLUE + "Excluir Punição> " + ChatColor.GRAY + "A punição " + ChatColor.RED + "" + editando.get(p.getName()) + " " + ChatColor.GRAY + "foi excluida com sucesso!");
+					if(Main.english) {
+						p.sendMessage(ChatColor.BLUE + "Delete Punishment> " + ChatColor.GRAY + "The punishment " + ChatColor.RED + editando.get(p.getName()) + " " + ChatColor.GRAY + "was deleted successful!");
+						return;
+					}
+					p.sendMessage(ChatColor.BLUE + "Excluir Punição> " + ChatColor.GRAY + "A punição " + ChatColor.RED + "" + editando.get(p.getName()) + " " + ChatColor.GRAY + "foi excluida com sucesso!");
 					return;
 				}
 				if(e.getCurrentItem().isSimilar(sev1)) {
@@ -1021,24 +1443,32 @@ public class MainPunish implements Listener{
 							openFPunish(p, punished, flagra, "chat", getSev(c2.getString(s + ".stname"), punished), c2.getString(s + ".stname"), c2.getString(s + ".description"));
 						}
 					}
+					return;
 				}
 				if(e.getCurrentItem().isSimilar(flagr)) {
 					p.closeInventory();
 					flagra = false;
 					reabrirInv(p);
 					e.setCancelled(true);
+					return;
 				}
 				if(e.getCurrentItem().isSimilar(denun)) {
 					p.closeInventory();
 					flagra = true;
 					reabrirInv(p);
 					e.setCancelled(true);
+					return;
 				}
 				if(e.getCurrentItem().isSimilar(prova)) {
 					e.setCancelled(true);
 					emprova.add(p.getName());
 					p.closeInventory();
-					p.sendMessage("" + ChatColor.BLUE + "Punir> " + ChatColor.GRAY + "Digite o link da prova no chat. O inventário será aberto em seguida.");
+					if(Main.english) {
+						p.sendMessage(ChatColor.BLUE + "Punish> " + ChatColor.GRAY + "Type the proof link in the chat. The inventory will then open.");
+						return;
+					}
+					p.sendMessage(ChatColor.BLUE + "Punir> " + ChatColor.GRAY + "Digite o link da prova no chat. O inventário será aberto em seguida.");
+					return;
 				}
 				if(e.getCurrentItem().isSimilar(canc)) {
 					e.setCancelled(true);
@@ -1050,12 +1480,17 @@ public class MainPunish implements Listener{
 					tip = "";
 					emprova.remove(p.getName());
 					p.closeInventory();
+					return;
 				}
 				if(e.getCurrentItem().isSimilar(conf)) {
 					e.setCancelled(true);
 					if(provaa.equalsIgnoreCase("")) {
 						if(!flagra) {
-							p.sendMessage("" + ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Uma prova precisa ser anexada no modo denúncia.");
+							if(Main.english) {
+								p.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED + "A proof need be attached in report mode.");
+							} else {
+								p.sendMessage("" + ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Uma prova precisa ser anexada no modo denúncia.");
+							}
 						} else {
 							p.closeInventory();
 							punish(p, punish.get(p.getName()), flagra, sigla, descr, tip);
@@ -1074,6 +1509,7 @@ public class MainPunish implements Listener{
 					emprova.remove(p.getName());
 					e.setCancelled(true);
 				}
+				return;
 			}
 		}
 		
@@ -1129,38 +1565,67 @@ public class MainPunish implements Listener{
 				BanMute(punished, desc, sigl, prova, inact, tipo, sev, sla);
 			}
 			for(Player ss : Bukkit.getOnlinePlayers()) {
-				ss.sendMessage("" + ChatColor.BLUE + "Punição> " + ChatColor.RED + "" + punished + " " + ChatColor.GRAY + "foi punido(a) por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+				if(Main.english) {
+					ss.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "have been punished for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+					return;
+				}
+				ss.sendMessage(ChatColor.BLUE + "Punição> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "foi punido(a) por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+				return;
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+		return;
 	}
 	
 	public static void BanMute(String punished, String desc, String sigl, String prova, boolean inact, String tipo, int sev, long exp) {
 		Player p = Bukkit.getPlayer(punished);
 		String flag = "";
 		if(inact) {
-			flag = "" + ChatColor.AQUA + "em flagrante";
+			if(Main.english) {
+				flag = "" + ChatColor.AQUA + "in act";
+			} else {
+				flag = "" + ChatColor.AQUA + "em flagrante";
+			}
 		} else {
-			flag = "" + ChatColor.GOLD + "por denúncia";
+			if(Main.english) {
+				flag = "" + ChatColor.GOLD + "by report";
+			} else {
+				flag = "" + ChatColor.GOLD + "por denúncia";
+			}
 		}
 		if(!(p instanceof Player)) 	{
 			return;
 		}
-		SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyy HH:mm:ss");
+		SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date data = new Date(exp);
-		if(tipo.equalsIgnoreCase("chat") && sev !=10) {
-			if(exp != -1) {
-				p.sendMessage("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi calado por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "até " + ChatColor.RED + "" + sf.format(data) + " BRT " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED + "" + prova + " \n" + ChatColor.YELLOW + "" + desc);
+		if(tipo.equalsIgnoreCase("chat")) {
+			if(Main.english) {
+				if(exp != -1) {
+					p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've benn muted for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "until " + ChatColor.RED + sf.format(data) + " " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW + desc);
+				} else {
+					p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've benn muted for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "forever " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW +  desc);
+				}
 			} else {
-				p.sendMessage("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi calado por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "permanentemente " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED + "" + prova + " \n" + ChatColor.YELLOW + "" + desc);
+				if(exp != -1) {
+					p.sendMessage(ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi calado por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "até " + ChatColor.RED + "" + sf.format(data) + " " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED +  prova + " \n" + ChatColor.YELLOW +  desc);
+				} else {
+					p.sendMessage(ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi calado por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "permanentemente " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED + "" + prova + " \n" + ChatColor.YELLOW + "" + desc);
+				}
 			}
-			
 		} else {
-			if(exp != -1) {
-				p.kickPlayer("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi banido por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "até " + ChatColor.RED + "" + sf.format(data) + " BRT " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED + "" + prova + " \n" + ChatColor.YELLOW + "" + desc);
+			if(Main.english) {
+				if(exp != -1) {
+					p.kickPlayer(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've been banned for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "until " + ChatColor.RED + sf.format(data) + " " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW + desc);
+				} else {
+					p.kickPlayer(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've been banned for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "forever " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED +  prova + " \n" + ChatColor.YELLOW + desc);
+				}
 			} else {
-				p.kickPlayer("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi banido por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "permanentemente " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED + "" + prova + " \n" + ChatColor.YELLOW + "" + desc);
+				if(exp != -1) {
+					p.kickPlayer(ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi banido por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "até " + ChatColor.RED + "" + sf.format(data) + " " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW + desc);
+				} else {
+					p.kickPlayer(ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi banido por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "permanentemente " + flag + " " + ChatColor.GOLD + "com esta prova: \n" + ChatColor.RED +  prova + " \n" + ChatColor.YELLOW + desc);
+				}
 			}
 		}
 	}
@@ -1168,11 +1633,17 @@ public class MainPunish implements Listener{
 	public static String getRemaing(long exp) {
 		String sla = "";
 		if(exp == -1) {
+			if(Main.english) {
+				return "Doesn't expire";
+			}
 			return "Não expira";
 		}
 		long agora = System.currentTimeMillis();
 		long pronto = exp - agora;
 		if(pronto < 0) {
+			if(Main.english) {
+				return "Expired";
+			}
 			return "Expirado";
 		}
 	
@@ -1180,17 +1651,32 @@ public class MainPunish implements Listener{
 		long min = sec / 60;
 		long hora = min / 60;
 		long dia = hora / 24;
-		if(dia >= 1) {
-			return dia + " dia(s) restante(s)";
-		}
-		if(hora >= 1) {
-			return hora + " hora(s) restante(s)";
-		}
-		if(min >= 1) {
-			return min + " minuto(s) restante(s)";
-		}
-		if(sec >=1) {
-			return sec + " segundo(s) restante(s)";
+		if(Main.english) {
+			if(dia >= 1) {
+				return dia + " day(s) remaining(s)";
+			}
+			if(hora >= 1) {
+				return hora + " hour(s) remaining(s)";
+			}
+			if(min >= 1) {
+				return min + " minute(s) remaining(s)";
+			}
+			if(sec >=1) {
+				return sec + " second(s) remaining(s)";
+			}
+		} else {
+			if(dia >= 1) {
+				return dia + " dia(s) restante(s)";
+			}
+			if(hora >= 1) {
+				return hora + " hora(s) restante(s)";
+			}
+			if(min >= 1) {
+				return min + " minuto(s) restante(s)";
+			}
+			if(sec >=1) {
+				return sec + " segundo(s) restante(s)";
+			}
 		}
 		return sla;
 	}
@@ -1230,29 +1716,59 @@ public class MainPunish implements Listener{
 			Player p = Bukkit.getPlayer(punished);
 			String flaga = "";
 			if(inact) {
-				flaga = ChatColor.AQUA + "em flagrante";
+				if(Main.english) {
+					flaga = ChatColor.AQUA + "in act";
+				} else {
+					flaga = ChatColor.AQUA + "em flagrante";
+				}
 			} else {
-				flaga = ChatColor.GOLD + "por denúncia";
+				if(Main.english) {
+					flaga = ChatColor.GOLD + "by report";
+				} else {
+					flaga = ChatColor.GOLD + "por denúncia";
+				}
 			}
-			p.sendMessage("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + id + "] " + flaga + " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + "" + proof + " \n" + ChatColor.YELLOW + "" + desc + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD + "' para poder jogar e falar novamente.");
 			emwarn.add(punished);
+			if(Main.english) {
+				p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've been warned for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + id + "] " + flaga + " " + ChatColor.GOLD + "with this proof:\n" + ChatColor.RED + proof + " \n" + ChatColor.YELLOW + desc + "\n" + ChatColor.GOLD + "Type '" + ChatColor.RED + "understood" + ChatColor.GOLD + "' to can play and communicate again.");
+				return;
+			}
+			p.sendMessage(ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + id + "] " + flaga + " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + proof + " \n" + ChatColor.YELLOW + desc + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD + "' para poder jogar e falar novamente.");
+			return;
 		}
 	}
 	
 	public static String getLastWarn(String punished) {
-		String msg = "";
+		String flaga = "";
+		
 		try {
 			Statement s = Main.c.createStatement();
 			ResultSet res = s.executeQuery("SELECT * FROM punish WHERE Nome='" + punished + "' AND Sev < 3 ORDER BY id;");
 			if(!res.next()) {
 				return null;
 			}
+			if(res.getBoolean("Tipo")) {
+				if(Main.english) {
+					flaga = ChatColor.AQUA + "in act";
+				} else {
+					flaga = ChatColor.AQUA + "em flagrante";
+				}
+			} else {
+				if(Main.english) {
+					flaga = ChatColor.GOLD + "by report";
+				} else {
+					flaga = ChatColor.GOLD + "por denúncia";
+				}
+			}
 			String sigla = res.getString("Sigla");
-			msg = "" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED + "" + getName(res.getString("Sigla")) + " " + ChatColor.DARK_RED + "[" + sigla.toUpperCase() + "#" + getId(punished, sigla) + "] " + res.getBoolean("Tipo") + " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + "" + res.getString("Prova") + " \n" + ChatColor.YELLOW + "" + res.getString("Desc") + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD + "' para poder jogar e falar novamente.";
+			if(Main.english) {
+				return ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've been warned for " + ChatColor.RED + getName(res.getString("Sigla")) + " " + ChatColor.DARK_RED + "[" + sigla.toUpperCase() + "#" + getId(punished, sigla) + "] " + flaga + " " + ChatColor.GOLD + "with this proof:\n" + ChatColor.RED + res.getString("Prova") + " \n" + ChatColor.YELLOW + res.getString("Desc") + "\n" + ChatColor.GOLD + "Type '" + ChatColor.RED + "understood" + ChatColor.GOLD + "' to can play and communicate again.";
+			}
+			return ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED + "" + getName(res.getString("Sigla")) + " " + ChatColor.DARK_RED + "[" + sigla.toUpperCase() + "#" + getId(punished, sigla) + "] " + flaga + " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + res.getString("Prova") + " \n" + ChatColor.YELLOW + res.getString("Desc") + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD + "' para poder jogar e falar novamente.";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return msg;
+		return null;
 	}
 	
 	public static void punish(Player punisher, String punished, boolean inact, String sigl, String desc, String tipo) {
@@ -1286,7 +1802,11 @@ public class MainPunish implements Listener{
 			s.setLong(9, sla);
 			s.setInt(10, 0);
 			s.setString(11, null);
-			s.setString(12, "Uma prova será anexada posteriormente.");
+			if(Main.english) {
+				s.setString(12, "A proof will be attached later.");
+			} else {
+				s.setString(12, "Uma prova será anexada posteriormente.");
+			}
 			s.setString(13, desc);
 			s.setString(14, punisher.getName());
 			s.execute();	
@@ -1294,12 +1814,24 @@ public class MainPunish implements Listener{
 			st.close();
 			res.close();
 			if(sev < 3) {
-				sendWarn(punished, "Uma prova será anexada posteriormente.", sigl, flagra, desc, getId(punished, sigl));			
+				if(Main.english) {
+					sendWarn(punished, "A proof will be attached later.", sigl, flagra, desc, getId(punished, sigl));
+				} else {
+					sendWarn(punished, "Uma prova será anexada posteriormente.", sigl, flagra, desc, getId(punished, sigl));
+				}				
 			} else {
-				BanMute(punished, desc, sigl, "Uma prova será anexada posteriormente.", inact, tipo, sev, sla);
+				if(Main.english) {
+					BanMute(punished, desc, sigl, "A proof will be attached later.", inact, tipo, sev, sla);
+				} else {
+					BanMute(punished, desc, sigl, "Uma prova será anexada posteriormente.", inact, tipo, sev, sla);
+				}
 			}
 			for(Player ss : Bukkit.getOnlinePlayers()) {
-				ss.sendMessage("" + ChatColor.BLUE + "Punição> " + ChatColor.RED + "" + punished + " " + ChatColor.GRAY + "foi punido(a) por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+				if(Main.english) {
+					ss.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "have been punished for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+				} else {
+					ss.sendMessage(ChatColor.BLUE + "Punição> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "foi punido(a) por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+				}
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -1318,17 +1850,32 @@ public class MainPunish implements Listener{
 		if(tipo.equalsIgnoreCase("jogo")) {
 			msg = "Ban";
 		}
-		if(sev > 2 && sev < 5) {
-			msg += " de 2 horas";
-		}
-		if(sev > 4 && sev < 8) {
-			msg += " de 1 dia";
-		}
-		if(sev > 7 && sev < 10) {
-			msg += " de 1 semana";
-		}
-		if(sev == 10) {
-			msg += " permanente";
+		if(Main.english) {
+			if(sev > 2 && sev < 5) {
+				msg = "2 hours " + msg;
+			}
+			if(sev > 4 && sev < 8) {
+				msg = "A day " + msg;
+			}
+			if(sev > 7 && sev < 10) {
+				msg = "A week " + msg;
+			}
+			if(sev == 10) {
+				msg = "Forever";
+			}
+		} else {
+			if(sev > 2 && sev < 5) {
+				msg += " de 2 horas";
+			}
+			if(sev > 4 && sev < 8) {
+				msg += " de 1 dia";
+			}
+			if(sev > 7 && sev < 10) {
+				msg += " de 1 semana";
+			}
+			if(sev == 10) {
+				msg += " permanente";
+			}
 		}
 		return msg;
 	}
