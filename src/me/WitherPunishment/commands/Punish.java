@@ -61,6 +61,14 @@ public class Punish implements CommandExecutor{
 				}
 			}
 			if(sender.hasPermission("punish.command.pset")) {
+				if(args.length < 2) {
+					if(Main.english) {
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Correct usage: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "Punishment Set> " + ChatColor.RED + " Uso correto: " + ChatColor.GOLD + " /pset language [brazilian/english]");
+					}
+					return true;
+				}
 				if(args[0].equalsIgnoreCase("language")) {
 					if(args[1].equalsIgnoreCase("brazilian")) {
 						Main.pl.getConfig().set("config.language", "brazilian");
