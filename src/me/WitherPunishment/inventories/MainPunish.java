@@ -1186,14 +1186,14 @@ public class MainPunish implements Listener{
 	public static String getName(String sigl) {
 		ConfigurationSection c = Main.pl.getConfig().getConfigurationSection("punishments.gameViolations");
 		for(String s : c.getKeys(false)) {
-			if(sigl.equalsIgnoreCase(c.getString(s + ".stname").toUpperCase())) {
+			if(sigl.equalsIgnoreCase(c.getString(s + ".stname"))) {
 				return c.getString(s + ".name");
 			}
 		}
 		ConfigurationSection c2 = Main.pl.getConfig().getConfigurationSection("punishments.chatViolations");
 		for(String s : c2.getKeys(false)) {
-			if(sigl.equalsIgnoreCase(c.getString(s + ".stname").toUpperCase())) {
-				return c.getString(s + ".name");
+			if(sigl.equalsIgnoreCase(c2.getString(s + ".stname"))) {
+				return c2.getString(s + ".name");
 			}
 		}
 		return "";
@@ -1206,7 +1206,7 @@ public class MainPunish implements Listener{
 			if(inact) {
 				flaga = ChatColor.AQUA + "em flagrante";
 			} else {
-				flaga = "" + ChatColor.GOLD + "por denúncia";
+				flaga = ChatColor.GOLD + "por denúncia";
 			}
 			p.sendMessage("" + ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED + "" + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + id + "] " + flaga + " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + "" + proof + " \n" + ChatColor.YELLOW + "" + desc + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD + "' para poder jogar e falar novamente.");
 			emwarn.add(punished);
@@ -1295,10 +1295,10 @@ public class MainPunish implements Listener{
 		if(sev > 2 && sev < 5) {
 			msg += " de 2 horas";
 		}
-		if(sev >4 && sev < 8) {
+		if(sev > 4 && sev < 8) {
 			msg += " de 1 dia";
 		}
-		if(sev >7 && sev < 10) {
+		if(sev > 7 && sev < 10) {
 			msg += " de 1 semana";
 		}
 		if(sev == 10) {
