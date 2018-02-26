@@ -124,7 +124,7 @@ public class Chat implements Listener{
 			if(!res.getBoolean("Cancelado")) {
 				return true;
 			}
-			s.execute("UPDATE punish SET Cancelado=1, CancelBy='Sistema' WHERE id=" + res.getInt("id") + ";");
+			s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
 		}	
 		res.close();
 		ResultSet res2 = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "' AND Modo=1 AND Fim = -1 AND Sev = 10;");
@@ -132,7 +132,7 @@ public class Chat implements Listener{
 			if(!res2.getBoolean("Cancelado")) {
 				return true;
 			}
-			s.execute("UPDATE punish SET Cancelado=1, CancelBy='Sistema' WHERE id=" + res.getInt("id") + ";");
+			s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
 		}	
 		
 		} catch (SQLException e) {

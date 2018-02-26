@@ -849,7 +849,7 @@ public class MainPunish implements Listener{
 				dp.add("" + ChatColor.WHITE + "Activated: " + sf.format(data1));
 				dp.add("" + ChatColor.WHITE + "Expires: " + expira);
 				dp.add("" + ChatColor.WHITE + "Cancelled: " + cancel);
-				if(cancel.equalsIgnoreCase("Yes")) {dp.add("" + ChatColor.WHITE + "Cancelled by: " + res.getString("CancelBy")); }
+				if(cancel.equalsIgnoreCase("Yes") || cancel.equalsIgnoreCase("Sim")) {if(res.getBoolean("CancelBy")) { dp.add("" + ChatColor.WHITE + "Cancelled by: System"); } else { dp.add("" + ChatColor.WHITE + "Cancelled by: " + res.getString("CancelBy")); }}
 				dp.add("" + ChatColor.WHITE + "Proof: " + res.getString("Prova"));
 				dp.add("" + ChatColor.WHITE + "Staff: " + res.getString("Staff"));
 				dp.add("");
@@ -865,7 +865,7 @@ public class MainPunish implements Listener{
 				dp.add("" + ChatColor.WHITE + "Ativada: " + sf.format(data1));
 				dp.add("" + ChatColor.WHITE + "Expira: " + expira);
 				dp.add("" + ChatColor.WHITE + "Cancelado: " + cancel);
-				if(cancel.equalsIgnoreCase("Sim")) {dp.add("" + ChatColor.WHITE + "Cancelado por: " + res.getString("CancelBy")); }
+				if(cancel.equalsIgnoreCase("Sim") || cancel.equalsIgnoreCase("Yes")) {if(res.getBoolean("CancelBy")) { dp.add("" + ChatColor.WHITE + "Cancelado por: Sistema"); } else { dp.add("" + ChatColor.WHITE + "Cancelado por: " + res.getString("CancelBy")); }}
 				dp.add("" + ChatColor.WHITE + "Prova: " + res.getString("Prova"));
 				dp.add("" + ChatColor.WHITE + "Staff: " + res.getString("Staff"));
 				dp.add("");
@@ -1169,7 +1169,6 @@ public class MainPunish implements Listener{
 				             }
 				}
 				}
-		       
 				if(e.getCurrentItem().isSimilar(cabeca)) {
 					e.setCancelled(true);
 					return;
@@ -1235,24 +1234,18 @@ public class MainPunish implements Listener{
 				if(e.getCurrentItem().isSimilar(spun)) {
 					e.setCancelled(true);
 					p.closeInventory();
-					String prova = " ";
-					if(provaa != "") {
-						prova = " Prova='" + provaa + "',";
-					}
 					String sev = " ";
-					if(seve != 0) {
-						sev = " Sev=" + seve + ",";
-					}
 					String fim = " ";
+					String sla = "";
 					if(seve != 0) {
+						sev = " Sev=" + seve;
 						if(seve == 10) {
-							fim = " Fim=-1,";
+							fim = ", Fim=-1";
 						} else {
-							fim = " Fim=" + getFMillis(seve) + ",";
+							fim = ", Fim=" + getFMillis(seve);
 						}
 						
 					}
-					String sla = "";
 					if(fla == "") {
 						sla = " ";
 					}
@@ -1263,7 +1256,16 @@ public class MainPunish implements Listener{
 						sla = " Tipo = 0";
 					}
 					Statement s = Main.c.createStatement();
-					s.execute("UPDATE punish SET" + prova + sev + fim + sla + " WHERE id=" + editando.get(p.getName()) + ";");
+					if(provaa != "") {
+						s.execute("UPDATE punish SET Prova = '" + provaa + "' WHERE id=" + editando.get(p.getName()) + ";");
+					}
+					if(seve != 0) {
+						s.execute("UPDATE punish SET" + sev + fim + " WHERE id=" + editando.get(p.getName()) + ";");
+					}
+					if(fla != "") {
+						s.execute("UPDATE punish SET" + sla + " WHERE id=" + editando.get(p.getName()) + ";");
+					}
+					
 					fla = "";
 					s.close();
 					editando.remove(p.getName());
@@ -1916,10 +1918,10 @@ public class MainPunish implements Listener{
 		}
 		try {
 			Statement s = Main.c.createStatement();
-			ResultSet res = s.executeQuery("SELECT COUNT(*) AS total FROM punish WHERE Nome='" + punished + "' AND Sigla = '" + sigl.toUpperCase() + "' AND CancelBy != 'Sistema';");
+			ResultSet res = s.executeQuery("SELECT Sev FROM punish WHERE Nome='" + punished + "' AND Sigla = '" + sigl.toUpperCase() + "' ORDER BY id;");
 			if(res.next()) {
-				int sev2 = res.getInt("total");
-				severidade = severidade + sev2;
+				int sev2 = res.getInt("Sev");
+				return sev2 + 1;
 			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
