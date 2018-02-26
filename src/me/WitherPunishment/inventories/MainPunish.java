@@ -1148,6 +1148,10 @@ public class MainPunish implements Listener{
 	public void click(InventoryClickEvent e) throws SQLException {
 		Player p = (Player) e.getWhoClicked();
 		if(p instanceof Player) {
+			if(e.getCurrentItem().isSimilar(cabeca)) {
+				e.setCancelled(true);
+				return;
+			}
 				if(ScrollerInventory.users.containsKey(p.getUniqueId())) {
 					 ScrollerInventory inv = ScrollerInventory.users.get(p.getUniqueId());
 				        if(e.getCurrentItem() == null) return;
@@ -1168,10 +1172,6 @@ public class MainPunish implements Listener{
 				                 p.openInventory(inv.pages.get(inv.currpage));
 				             }
 				}
-				}
-				if(e.getCurrentItem().isSimilar(cabeca)) {
-					e.setCancelled(true);
-					return;
 				}
 				if(e.getCurrentItem().isSimilar(punicoes)) {
 					e.setCancelled(true);
