@@ -1568,7 +1568,7 @@ public class MainPunish implements Listener{
 			}
 			for(Player ss : Bukkit.getOnlinePlayers()) {
 				if(Main.english) {
-					ss.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "have been punished for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+					ss.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "was punished for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
 					return;
 				}
 				ss.sendMessage(ChatColor.BLUE + "Punição> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "foi punido(a) por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
@@ -1830,7 +1830,7 @@ public class MainPunish implements Listener{
 			}
 			for(Player ss : Bukkit.getOnlinePlayers()) {
 				if(Main.english) {
-					ss.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "have been punished for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
+					ss.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "was punished for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
 				} else {
 					ss.sendMessage(ChatColor.BLUE + "Punição> " + ChatColor.RED + punished + " " + ChatColor.GRAY + "foi punido(a) por " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "(" + getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
 				}
