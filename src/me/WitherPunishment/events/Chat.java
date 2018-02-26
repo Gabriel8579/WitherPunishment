@@ -69,7 +69,7 @@ public class Chat implements Listener{
 		if(MainPunish.eprova.contains(p.getName())) {
 			e.setCancelled(true);
 			if(e.getMessage().equalsIgnoreCase("cancelar") || e.getMessage().equalsIgnoreCase("cancel")) {
-				MainPunish.reabrirInv(p);
+				MainPunish.editPunish(p, MainPunish.editando.get(p.getName()));
 				MainPunish.eprova.remove(p.getName());
 			} else if(e.getMessage().toLowerCase().startsWith("http://") || (e.getMessage().toLowerCase().startsWith("https://"))) {
 				MainPunish.provaa = e.getMessage();
