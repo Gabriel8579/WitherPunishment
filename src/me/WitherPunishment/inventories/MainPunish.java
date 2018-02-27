@@ -1604,9 +1604,9 @@ public class MainPunish implements Listener{
 		if(tipo.equalsIgnoreCase("chat")) {
 			if(Main.english) {
 				if(exp != -1) {
-					p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've benn muted for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "until " + ChatColor.RED + sf.format(data) + " " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW + desc);
+					p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've been muted for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.GOLD + "until " + ChatColor.RED + sf.format(data) + " " + ChatColor.YELLOW + "(" + getRemaing(exp) + ") " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW + desc);
 				} else {
-					p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've benn muted for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "forever " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW +  desc);
+					p.sendMessage(ChatColor.DARK_RED + "Punishment> " + ChatColor.GOLD + "You've been muted for " + ChatColor.RED + getName(sigl) + " " + ChatColor.DARK_RED + "[" + sigl.toUpperCase() + "#" + getId(punished, sigl) + "] " + ChatColor.RED + "forever " + flag + " " + ChatColor.GOLD + "with this proof: \n" + ChatColor.RED + prova + " \n" + ChatColor.YELLOW +  desc);
 				}
 			} else {
 				if(exp != -1) {
