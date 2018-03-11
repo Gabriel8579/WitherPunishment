@@ -20,15 +20,13 @@ public class DataManager {
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
-		
 		File db = new File(Main.pl.getDataFolder() + "/playerdata", "sql.db");
 		if(!db.exists()) {
 			try {
 				db.createNewFile();
 			} catch (IOException e1) {
 				e1.printStackTrace();
-			}
-			
+			}			
 			try {
 				Connection conn = DriverManager.getConnection(url);
 	            if (conn != null) {
@@ -38,10 +36,8 @@ public class DataManager {
 	        } catch (SQLException e) {
 	            System.out.println(e.getMessage());
 	        }
-			
 		}
 		createTable();
-		
 	}
 	
 	public static void createTable() {
