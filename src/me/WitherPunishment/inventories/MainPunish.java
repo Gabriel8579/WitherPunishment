@@ -101,7 +101,7 @@ public class MainPunish implements Listener {
 	public static ItemMeta excluirm;
 
 	public static int seve;
-	public static String provaa;
+	public static String provaa = "";
 	public static String sigla;
 	public static String descr;
 	public static String tip;
@@ -1180,11 +1180,12 @@ public class MainPunish implements Listener {
 		p.openInventory(inv);
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void click(InventoryClickEvent e) throws SQLException {
 		Player p = (Player) e.getWhoClicked();
 		if (p instanceof Player) {
-			if (e.getCurrentItem().isSimilar(cabeca)) {
+			if (e.getCurrentItem().getTypeId() == 397 && punish.containsKey(p.getName()) && e.getCurrentItem().getItemMeta().getDisplayName().startsWith("§4")) {
 				e.setCancelled(true);
 				return;
 			}
@@ -1213,6 +1214,10 @@ public class MainPunish implements Listener {
 					}
 					return;
 				}
+			}
+			if(e.getCurrentItem().isSimilar(tpun)) {
+				e.setCancelled(true);
+				return;
 			}
 			if (e.getCurrentItem().isSimilar(punicoes)) {
 				e.setCancelled(true);
@@ -1550,7 +1555,7 @@ public class MainPunish implements Listener {
 			}
 			if (e.getCurrentItem().isSimilar(conf)) {
 				e.setCancelled(true);
-				if (provaa.equalsIgnoreCase("")) {
+				if (provaa.equalsIgnoreCase("") || provaa == null) {
 					if (!flagra) {
 						if (Main.english) {
 							p.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED
@@ -1753,10 +1758,10 @@ public class MainPunish implements Listener {
 			return "Expirado";
 		}
 
-		long sec = pronto / 1000;
-		long min = sec / 60;
-		long hora = min / 60;
-		long dia = hora / 24;
+		long sec = Math.round(pronto / 1000);
+		long min = Math.round(sec / 60);
+		long hora = Math.round(min / 60);
+		long dia = Math.round(hora / 24);
 		if (Main.english) {
 			if (dia >= 1) {
 				return dia + " day(s) remaining(s)";
@@ -2025,8 +2030,8 @@ public class MainPunish implements Listener {
 			mfinal = System.currentTimeMillis() + umdia;
 		}
 		if (sev == 8 || sev == 9) {
-			int umdia = 7 * 24 * 60 * 60 * 1000;
-			mfinal = System.currentTimeMillis() + umdia;
+			int umasemana = 7 * 24 * 60 * 60 * 1000;
+			mfinal = System.currentTimeMillis() + umasemana;
 		}
 		return mfinal;
 	}
@@ -2048,7 +2053,7 @@ public class MainPunish implements Listener {
 		try {
 			Statement s = Main.c.createStatement();
 			ResultSet res = s.executeQuery("SELECT Sev FROM punish WHERE Nome='" + punished + "' AND Sigla = '"
-					+ sigl.toUpperCase() + "' ORDER BY id;");
+					+ sigl.toUpperCase() + "' ORDER BY id DESC;");
 			if (res.next()) {
 				int sev2 = res.getInt("Sev");
 				return sev2 + 1;
@@ -2071,4 +2076,6 @@ public class MainPunish implements Listener {
 		}
 		return 0;
 	}
+	
+	
 }

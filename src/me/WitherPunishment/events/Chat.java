@@ -86,7 +86,7 @@ public class Chat implements Listener{
 			return;
 		}	
 		e.setFormat("" + ChatColor.YELLOW + "" + p.getName() + "" + ChatColor.BLUE + " >> " + ChatColor.WHITE + "" + e.getMessage());
-		if(!p.hasPermission("punish.chat.punish")) {
+		if(p.hasPermission("punish.chat.punish")) {
 			TextComponent punir = null;
 			if(Main.english) {
 				punir = new TextComponent(ChatColor.DARK_RED + "[Punish]");
