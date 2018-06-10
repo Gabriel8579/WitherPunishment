@@ -53,7 +53,7 @@ public class Chat implements Listener{
 				MainPunish.reabrirInv(p);
 				MainPunish.emprova.remove(p.getName());
 			} else if(e.getMessage().toLowerCase().startsWith("http://") || (e.getMessage().toLowerCase().startsWith("https://"))) {
-				MainPunish.provaa = e.getMessage();
+				MainPunish.provaa.put(p, e.getMessage());
 				MainPunish.reabrirInv(p);
 				MainPunish.emprova.remove(p.getName());
 			} else {
@@ -72,7 +72,7 @@ public class Chat implements Listener{
 				MainPunish.editPunish(p, MainPunish.editando.get(p.getName()));
 				MainPunish.eprova.remove(p.getName());
 			} else if(e.getMessage().toLowerCase().startsWith("http://") || (e.getMessage().toLowerCase().startsWith("https://"))) {
-				MainPunish.provaa = e.getMessage();
+				MainPunish.provaa.put(p, e.getMessage());
 				MainPunish.editPunish(p, MainPunish.editando.get(p.getName()));
 				MainPunish.eprova.remove(p.getName());
 			} else {
@@ -86,7 +86,7 @@ public class Chat implements Listener{
 			return;
 		}	
 		e.setFormat("" + ChatColor.YELLOW + "" + p.getName() + "" + ChatColor.BLUE + " >> " + ChatColor.WHITE + "" + e.getMessage());
-		if(p.hasPermission("punish.chat.punish")) {
+		if(!p.hasPermission("punish.chat.punish")) {
 			TextComponent punir = null;
 			if(Main.english) {
 				punir = new TextComponent(ChatColor.DARK_RED + "[Punish]");
@@ -119,20 +119,22 @@ public class Chat implements Listener{
 	public static boolean isMuted(Player p) {
 		try {
 		Statement s = Main.c.createStatement();
-		ResultSet res = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "' AND Modo=1 AND Fim > " + System.currentTimeMillis() + ";");
+		ResultSet res = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "' AND Modo=1;");
 		while(res.next()) {
 			if(!res.getBoolean("Cancelado")) {
-				return true;
+				if (res.getLong("Fim") > System.currentTimeMillis()) {
+					return true;
+				} else {
+					s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
+				}
 			}
-			s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
 		}	
 		res.close();
-		ResultSet res2 = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "' AND Modo=1 AND Fim = -1 AND Sev = 10;");
+		ResultSet res2 = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "' AND Modo=1 AND Sev = 10;");
 		while(res2.next()) {
 			if(!res2.getBoolean("Cancelado")) {
 				return true;
 			}
-			s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
 		}	
 		
 		} catch (SQLException e) {

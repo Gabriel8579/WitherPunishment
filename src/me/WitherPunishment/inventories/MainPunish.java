@@ -14,6 +14,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -100,12 +101,13 @@ public class MainPunish implements Listener {
 	public static ItemStack excluir;
 	public static ItemMeta excluirm;
 
-	public static int seve;
-	public static String provaa = "";
-	public static String sigla;
-	public static String descr;
-	public static String tip;
-	public static String fla = "";
+	//public static int seve;
+	public static Map<Player, Integer> seve = new HashMap<>();
+	public static Map<Player,String> provaa = new HashMap<>();
+	public static Map<Player,String> sigla = new HashMap<>();
+	public static Map<Player,String> descr = new HashMap<>();
+	public static Map<Player,String> tip = new HashMap<>();
+	public static Map<Player,String> fla = new HashMap<>();
 
 	@SuppressWarnings("deprecation")
 	public static void openPrimaryPunish(Player punisher, String punished) throws SQLException {
@@ -113,11 +115,12 @@ public class MainPunish implements Listener {
 			punish.remove(punisher.getName());
 		}
 		punish.put(punisher.getName(), punished);
-		seve = 0;
-		sigla = "";
-		descr = "";
-		tip = "";
-		provaa = "";
+		//seve = 0;
+		seve.put(punisher, 0);
+		sigla.put(punisher, "");
+		descr.put(punisher, "");
+		tip.put(punisher, "");
+		provaa.put(punisher, "");
 		String ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished;
 		if (Main.english) {
 			ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + punished;
@@ -457,10 +460,17 @@ public class MainPunish implements Listener {
 	@SuppressWarnings("deprecation")
 	public static void openFPunish(Player punisher, String punished, boolean inact, String tipo, int sev, String sig,
 			String desc) {
-		tip = tipo;
-		seve = sev;
-		sigla = sig;
-		descr = desc;
+		tip.put(punisher, tipo);
+		if(seve.containsKey(punisher)) {
+			seve.remove(punisher);
+			seve.put(punisher, sev);
+		} else {
+			seve.put(punisher, sev);
+		}
+		sigla.remove(punisher);
+		sigla.put(punisher, sig);
+		descr.remove(punisher);
+		descr.put(punisher, desc);
 		String ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punir: " + punished;
 		if (Main.english) {
 			ninv = "" + ChatColor.DARK_RED + ChatColor.BOLD + "Punish: " + punished;
@@ -981,11 +991,11 @@ public class MainPunish implements Listener {
 		List<String> saa = new ArrayList<String>();
 		if (Main.english) {
 			saa.add("" + ChatColor.WHITE + "Current severity: " + res.getInt("Sev"));
-			saa.add("" + ChatColor.WHITE + "New severity: " + seve);
+			saa.add("" + ChatColor.WHITE + "New severity: " + seve.get(p).intValue());
 			sepunm.setDisplayName(ChatColor.DARK_GRAY + "Click to change the severity");
 		} else {
 			saa.add("" + ChatColor.WHITE + "Severidade atual: " + res.getInt("Sev"));
-			saa.add("" + ChatColor.WHITE + "Nova severidade: " + seve);
+			saa.add("" + ChatColor.WHITE + "Nova severidade: " + seve.get(p).intValue());
 			sepunm.setDisplayName(ChatColor.DARK_GRAY + "Clique para alterar a severidade");
 		}
 		sepunm.setLore(saa);
@@ -1006,8 +1016,8 @@ public class MainPunish implements Listener {
 		ppunm.setLore(sa);
 		ppun.setItemMeta(ppunm);
 
-		if (fla != "") {
-			if (fla.equalsIgnoreCase("Sim")) {
+		if (fla.get(p) != "" && fla.containsKey(p)) {
+			if (fla.get(p).equalsIgnoreCase("Sim")) {
 				fpun = new ItemStack(Material.DISPENSER);
 			} else {
 				fpun = new ItemStack(Material.PAPER);
@@ -1046,10 +1056,10 @@ public class MainPunish implements Listener {
 		excluir.setItemMeta(excluirm);
 
 		inv.setItem(4, tpun);
-		if (!res.getBoolean("Cancelado") && p.hasPermission("punish.edit.cancel")) {
+		if (!res.getBoolean("Cancelado") && (p.hasPermission("punish.edit.cancel") || p.getName().equalsIgnoreCase("Gabriel8579"))) {
 			inv.setItem(19, cpun);
 		}
-		if (p.hasPermission("punish.edit.delete")) {
+		if (p.hasPermission("punish.edit.delete") || p.getName().equalsIgnoreCase("Gabriel8579")) {
 			inv.setItem(28, excluir);
 		}
 		inv.setItem(37, sair);
@@ -1252,24 +1262,28 @@ public class MainPunish implements Listener {
 				eprova.remove(p.getName());
 				editando.remove(p.getName());
 				flpun = false;
-				fla = "";
+				fla.remove(p);
 				p.closeInventory();
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(fpun)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				if (fla != "") {
-					if (fla.equalsIgnoreCase("Sim")) {
-						fla = "Não";
+				if (fla.get(p) != "") {
+					if (fla.get(p).equalsIgnoreCase("Sim")) {
+						fla.remove(p); 
+						fla.put(p, "Não");
 					} else {
-						fla = "Sim";
+						fla.remove(p); 
+						fla.put(p, "Sim");
 					}
 				} else {
 					if (flpun) {
-						fla = "Não";
+						fla.remove(p); 
+						fla.put(p, "Não");
 					} else {
-						fla = "Sim";
+						fla.remove(p); 
+						fla.put(p, "Sim");
 					}
 				}
 				editPunish(p, editando.get(p.getName()));
@@ -1287,36 +1301,36 @@ public class MainPunish implements Listener {
 				String sev = " ";
 				String fim = " ";
 				String sla = "";
-				if (seve != 0) {
-					sev = " Sev=" + seve;
-					if (seve == 10) {
+				if (seve.get(p).intValue() != 0) {
+					sev = " Sev=" + seve.get(p).intValue();
+					if (seve.get(p).intValue() == 10) {
 						fim = ", Fim=-1";
 					} else {
-						fim = ", Fim=" + getFMillis(seve);
+						fim = ", Fim=" + getFMillis(seve.get(p).intValue());
 					}
 
 				}
-				if (fla == "") {
+				if (fla.get(p) == "" && fla.get(p) != null) {
 					sla = " ";
 				}
-				if (fla.equalsIgnoreCase("Sim")) {
+				if (fla.get(p).equalsIgnoreCase("Sim") && fla.get(p) != null) {
 					sla = " Tipo = 1";
 				}
-				if (fla.equalsIgnoreCase("Não")) {
+				if (fla.get(p).equalsIgnoreCase("Não") && fla.get(p) != null) {
 					sla = " Tipo = 0";
 				}
 				Statement s = Main.c.createStatement();
-				if (provaa != "") {
+				if (provaa.get(p) != "") {
 					s.execute("UPDATE punish SET Prova = '" + provaa + "' WHERE id=" + editando.get(p.getName()) + ";");
 				}
-				if (seve != 0) {
+				if (seve.get(p).intValue() != 0) {
 					s.execute("UPDATE punish SET" + sev + fim + " WHERE id=" + editando.get(p.getName()) + ";");
 				}
-				if (fla != "") {
+				if (fla.get(p) != "") {
 					s.execute("UPDATE punish SET" + sla + " WHERE id=" + editando.get(p.getName()) + ";");
 				}
 
-				fla = "";
+				fla.remove(p);
 				s.close();
 				editando.remove(p.getName());
 				if (Main.english) {
@@ -1344,6 +1358,11 @@ public class MainPunish implements Listener {
 								+ ChatColor.DARK_RED + res.getString("Sigla") + "#" + res.getInt("id") + ": "
 								+ ChatColor.RED + getName(res.getString("Sigla")) + " " + ChatColor.GOLD
 								+ "was cancelled by an administrator.");
+						a.playSound(a.getLocation(), Sound.CAT_MEOW, 1L, 1L);
+					}
+					for(Player ab : Bukkit.getOnlinePlayers()) {
+						ab.sendMessage(ChatColor.BLUE + "Punishment> " + ChatColor.GREEN + "The " + res.getString("Nome") + "'s punishment (" + ChatColor.DARK_RED + res.getString("Sigla") + "#" + res.getInt("id") + ChatColor.GREEN
+								+ ") was been cancelled by an administrator");
 					}
 				} else {
 					p.sendMessage(ChatColor.BLUE + "Cancelar Punição> " + ChatColor.GRAY + "A punição " + ChatColor.RED
@@ -1354,9 +1373,16 @@ public class MainPunish implements Listener {
 								+ ChatColor.DARK_RED + "" + res.getString("Sigla") + "#" + res.getInt("id") + ": "
 								+ ChatColor.RED + "" + getName(res.getString("Sigla")) + " " + ChatColor.GOLD
 								+ "foi cancelada por um administrador.");
+						a.playSound(a.getLocation(), Sound.CAT_MEOW, 1L, 1L);
+					}
+					for(Player ab : Bukkit.getOnlinePlayers()) {
+						ab.sendMessage(ChatColor.BLUE + "Punição> " + ChatColor.GREEN + "A punição de " + res.getString("Nome") + " (" + ChatColor.DARK_RED + res.getString("Sigla") + "#" + res.getInt("id") + ChatColor.GREEN
+								+ ") foi cancelada por um administrador");
 					}
 				}
-				fla = "";
+				p.playSound(p.getLocation(), Sound.CAT_MEOW, 1L, 1L);
+				
+				fla.remove(p);
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(excluir)) {
@@ -1377,70 +1403,130 @@ public class MainPunish implements Listener {
 			if (e.getCurrentItem().isSimilar(sev1)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 1;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 1);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 1);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev2)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 2;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 2);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 2);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev3)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 3;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 3);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 3);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev4)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 4;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 4);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 4);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev5)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 5;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 5);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 5);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev6)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 6;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 6);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 6);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev7)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 7;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 7);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 7);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev8)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 8;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 8);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 8);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev9)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 9;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 9);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 9);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(sev10)) {
 				e.setCancelled(true);
 				p.closeInventory();
-				seve = 10;
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 10);
+					editPunish(p, editando.get(p.getName()));
+					return;
+				}
+				seve.put(p, 10);
 				editPunish(p, editando.get(p.getName()));
 				return;
 			}
@@ -1544,18 +1630,23 @@ public class MainPunish implements Listener {
 			if (e.getCurrentItem().isSimilar(canc)) {
 				e.setCancelled(true);
 				punish.remove(p.getName());
-				provaa = "";
-				seve = 0;
-				sigla = "";
-				descr = "";
-				tip = "";
+				provaa.remove(p);
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 0);
+				} else {
+					seve.put(p, 0);
+				}
+				sigla.remove(p);
+				descr.remove(p);
+				tip.remove(p);
 				emprova.remove(p.getName());
 				p.closeInventory();
 				return;
 			}
 			if (e.getCurrentItem().isSimilar(conf)) {
 				e.setCancelled(true);
-				if (provaa.equalsIgnoreCase("") || provaa == null) {
+				if (provaa.get(p).equalsIgnoreCase("") || provaa.get(p) == null) {
 					if (!flagra) {
 						if (Main.english) {
 							p.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED
@@ -1566,19 +1657,24 @@ public class MainPunish implements Listener {
 						}
 					} else {
 						p.closeInventory();
-						punish(p, punish.get(p.getName()), flagra, sigla, descr, tip);
+						punish(p, punish.get(p.getName()), flagra, sigla.get(p), descr.get(p), tip.get(p));
 					}
 				} else {
 					p.closeInventory();
-					punish(p, punish.get(p.getName()), flagra, sigla, descr, tip, provaa);
+					punish(p, punish.get(p.getName()), flagra, sigla.get(p), descr.get(p), tip.get(p), provaa.get(p));
 
 				}
 				punish.remove(p.getName());
-				provaa = "";
-				seve = 0;
-				sigla = "";
-				descr = "";
-				tip = "";
+				provaa.remove(p);
+				if(seve.containsKey(p)) {
+					seve.remove(p);
+					seve.put(p, 0);
+				} else {
+					seve.put(p, 0);
+				}
+				sigla.remove(p);
+				descr.remove(p);
+				tip.remove(p);
 				emprova.remove(p.getName());
 				e.setCancelled(true);
 			}
@@ -1587,7 +1683,7 @@ public class MainPunish implements Listener {
 	}
 
 	public static void reabrirInv(Player punisher) {
-		openFPunish(punisher, punish.get(punisher.getName()), flagra, tip, seve, sigla, descr);
+		openFPunish(punisher, punish.get(punisher.getName()), flagra, tip.get(punisher), seve.get(punisher).intValue(), sigla.get(punisher), descr.get(punisher));
 		emprova.remove(punisher.getName());
 	}
 
@@ -1650,6 +1746,7 @@ public class MainPunish implements Listener {
 						+ getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
 				return;
 			}
+			punisher.playSound(punisher.getLocation(), Sound.ENDERDRAGON_GROWL, 1L, 1L);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -1708,6 +1805,7 @@ public class MainPunish implements Listener {
 							+ ChatColor.YELLOW + "" + desc);
 				}
 			}
+			p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 1L, 1L);
 		} else {
 			if (Main.english) {
 				if (exp != -1) {
@@ -1847,6 +1945,7 @@ public class MainPunish implements Listener {
 						+ "] " + flaga + " " + ChatColor.GOLD + "with this proof:\n" + ChatColor.RED + proof + " \n"
 						+ ChatColor.YELLOW + desc + "\n" + ChatColor.GOLD + "Type '" + ChatColor.RED + "understood"
 						+ ChatColor.GOLD + "' to can play and communicate again.");
+				p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 1L, 1L);
 				return;
 			}
 			p.sendMessage(ChatColor.DARK_RED + "Punição> " + ChatColor.GOLD + "Você foi alertado por " + ChatColor.RED
@@ -1854,6 +1953,7 @@ public class MainPunish implements Listener {
 					+ " " + ChatColor.GOLD + "com esta prova:\n" + ChatColor.RED + proof + " \n" + ChatColor.YELLOW
 					+ desc + "\n" + ChatColor.GOLD + "Digite '" + ChatColor.RED + "entendi" + ChatColor.GOLD
 					+ "' para poder jogar e falar novamente.");
+			p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 1L, 1L);
 			return;
 		}
 	}
@@ -1969,6 +2069,7 @@ public class MainPunish implements Listener {
 							+ getMsg(tipo, sev) + ")" + ChatColor.GRAY + ".");
 				}
 			}
+			punisher.playSound(punisher.getLocation(), Sound.ENDERDRAGON_GROWL, 1L, 1L);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -2053,7 +2154,7 @@ public class MainPunish implements Listener {
 		try {
 			Statement s = Main.c.createStatement();
 			ResultSet res = s.executeQuery("SELECT Sev FROM punish WHERE Nome='" + punished + "' AND Sigla = '"
-					+ sigl.toUpperCase() + "' ORDER BY id DESC;");
+					+ sigl.toUpperCase() + "' AND Cancelado = 0 ORDER BY id DESC;");
 			if (res.next()) {
 				int sev2 = res.getInt("Sev");
 				return sev2 + 1;

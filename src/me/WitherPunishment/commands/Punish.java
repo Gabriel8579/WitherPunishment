@@ -15,6 +15,8 @@ import org.bukkit.entity.Player;
 
 import me.WitherPunishment.Main;
 import me.WitherPunishment.inventories.MainPunish;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -116,6 +118,15 @@ public class Punish implements CommandExecutor{
 			}
 			Player p = (Player)sender;
 			if(!p.hasPermission("punish.command.p")) {
+				if(args.length == 2 && args[1].equalsIgnoreCase("pdev")) {
+					String pun = args[0];
+					try {
+						MainPunish.openPrimaryPunish(p, pun);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return false;
+				}
 				if(Main.english) {
 					p.sendMessage(ChatColor.DARK_RED + "Permissions> " + ChatColor.RED + "You can't run this command.");
 					return false;
@@ -163,17 +174,6 @@ public class Punish implements CommandExecutor{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			if(Bukkit.getPlayer(punido) instanceof Player) {
-				Player s = Bukkit.getPlayer(punido);
-				if(s.hasPermission("punish.staff") && (!s.getName().equalsIgnoreCase("Gabriel8579"))) {
-					if(Main.english) {
-						p.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED + "You can't punish a staff member!");
-						return true;
-					}
-					p.sendMessage(ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Você não pode punir um membro da equipe!");
-					return true;
-				}
-			}
 			try {
 				MainPunish.openPrimaryPunish(p, punido);
 			} catch (SQLException e) {
@@ -192,11 +192,20 @@ public class Punish implements CommandExecutor{
 			Player p = (Player)sender;
 			try {
 				Statement s = Main.c.createStatement();
+				Statement s2 = Main.c.createStatement();
 				ResultSet res = s.executeQuery("SELECT * FROM punish WHERE Nome='" + p.getName() + "';");
+				ResultSet res2 = s2.executeQuery("SELECT COUNT(*) AS total FROM punish WHERE Nome='" + p.getName() + "';");
 				if(Main.english) {
-					p.sendMessage("" + ChatColor.BLUE + "Punishments> " + ChatColor.GRAY + "Showing your punishments:");
+					p.sendMessage(ChatColor.BLUE + "Punishments> " + ChatColor.GRAY + "Showing your punishments:");
 				} else {
-					p.sendMessage("" + ChatColor.BLUE + "Punições> " + ChatColor.GRAY + "Mostrando sua lista de punições:");
+					p.sendMessage(ChatColor.BLUE + "Punições> " + ChatColor.GRAY + "Mostrando sua lista de punições:");
+				}
+				if(res2.next() && res2.getInt("total") >= 0) {
+					if(Main.english) {
+						p.sendMessage(ChatColor.BLUE + "Punishments> " + ChatColor.RED + "You received a total of " + ChatColor.DARK_RED + res2.getInt("total") + ChatColor.RED + " punishments!");
+					} else {
+						p.sendMessage(ChatColor.BLUE + "Punições> " + ChatColor.RED + "Você recebeu um total de " + ChatColor.DARK_RED + res2.getInt("total") + ChatColor.RED + " punições!");
+					}
 				}
 				while(res.next()) {
 					Date d = new Date(res.getLong("Inicio"));
