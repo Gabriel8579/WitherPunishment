@@ -125,7 +125,7 @@ public class Chat implements Listener{
 				if (res.getLong("Fim") > System.currentTimeMillis()) {
 					return true;
 				} else {
-					s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
+					s.execute("UPDATE punish SET Cancelado=1, CancelBy='Sistema' WHERE id=" + res.getInt("id") + ";");
 				}
 			}
 		}	

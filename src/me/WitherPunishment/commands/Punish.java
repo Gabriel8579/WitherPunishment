@@ -6,7 +6,6 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -134,19 +133,9 @@ public class Punish implements CommandExecutor{
 			}
 			if(args.length != 1) {
 				if(args.length == 2 && args[1].equalsIgnoreCase("chat")) { 
-					if(Bukkit.getPlayer(args[0]) instanceof Player) {
-						Player s = Bukkit.getPlayer(args[0]);
-						if(s.hasPermission("punish.staff") && (!s.getName().equalsIgnoreCase("Gabriel8579"))) {
-							if(Main.english) {
-								p.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED + "You can't punish a staff member!");
-								return true;
-							}
-							p.sendMessage(ChatColor.DARK_RED + "Punir> " + ChatColor.RED + "Você não pode punir um membro da equipe!");
-							return true;
-						}
-					}
 					MainPunish.openTPunish(p, args[0], true);
 					MainPunish.punish.put(p.getName(), args[0]);
+					MainPunish.provaa.put(p, "");
 					return true;
 				}
 				if(Main.english) {

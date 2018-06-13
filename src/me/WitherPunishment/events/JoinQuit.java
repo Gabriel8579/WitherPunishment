@@ -90,7 +90,7 @@ public class JoinQuit implements Listener{
 			if(!res.getBoolean("Cancelado")) {
 				return res.getInt("id");
 			}
-			s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
+			s.execute("UPDATE punish SET Cancelado=1, CancelBy='Sistema' WHERE id=" + res.getInt("id") + ";");
 			return 0;
 		}	
 		res.close();
@@ -99,7 +99,7 @@ public class JoinQuit implements Listener{
 			if(!res2.getBoolean("Cancelado")) {
 				return res.getInt("id");
 			}
-			s.execute("UPDATE punish SET Cancelado=1, CancelBy=1 WHERE id=" + res.getInt("id") + ";");
+			s.execute("UPDATE punish SET Cancelado=1, CancelBy='Sistema' WHERE id=" + res.getInt("id") + ";");
 			return 0;
 		}	
 		

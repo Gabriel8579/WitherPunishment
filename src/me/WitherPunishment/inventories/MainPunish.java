@@ -880,7 +880,7 @@ public class MainPunish implements Listener {
 				dp.add("" + ChatColor.WHITE + "Expires: " + expira);
 				dp.add("" + ChatColor.WHITE + "Cancelled: " + cancel);
 				if (cancel.equalsIgnoreCase("Yes") || cancel.equalsIgnoreCase("Sim")) {
-					if (res.getBoolean("CancelBy")) {
+					if (res.getString("CancelBy") == "Sistema") {
 						dp.add("" + ChatColor.WHITE + "Cancelled by: System");
 					} else {
 						dp.add("" + ChatColor.WHITE + "Cancelled by: " + res.getString("CancelBy"));
@@ -903,7 +903,7 @@ public class MainPunish implements Listener {
 				dp.add("" + ChatColor.WHITE + "Expira: " + expira);
 				dp.add("" + ChatColor.WHITE + "Cancelado: " + cancel);
 				if (cancel.equalsIgnoreCase("Sim") || cancel.equalsIgnoreCase("Yes")) {
-					if (res.getBoolean("CancelBy")) {
+					if (res.getString("CancelBy") == "Sistema") {
 						dp.add("" + ChatColor.WHITE + "Cancelado por: Sistema");
 					} else {
 						dp.add("" + ChatColor.WHITE + "Cancelado por: " + res.getString("CancelBy"));
@@ -1010,7 +1010,7 @@ public class MainPunish implements Listener {
 			ppunm.setDisplayName(ChatColor.DARK_GRAY + "Click to attach/edit the proof");
 		} else {
 			sa.add("" + ChatColor.WHITE + "Prova atual: " + res.getString("Prova"));
-			sa.add("" + ChatColor.WHITE + "Nova prova: " + provaa);
+			sa.add("" + ChatColor.WHITE + "Nova prova: " + provaa.get(p));
 			ppunm.setDisplayName(ChatColor.DARK_GRAY + "Clique para anexar/editar a prova");
 		}
 		ppunm.setLore(sa);
@@ -1195,9 +1195,6 @@ public class MainPunish implements Listener {
 	public void click(InventoryClickEvent e) throws SQLException {
 		Player p = (Player) e.getWhoClicked();
 		if (p instanceof Player) {
-			if(e.getCurrentItem() == null) {
-				return;
-			}
 			if (e.getCurrentItem().getTypeId() == 397 && punish.containsKey(p.getName()) && e.getCurrentItem().getItemMeta().getDisplayName().startsWith("§4")) {
 				e.setCancelled(true);
 				return;
@@ -1324,7 +1321,7 @@ public class MainPunish implements Listener {
 				}
 				Statement s = Main.c.createStatement();
 				if (provaa.get(p) != "") {
-					s.execute("UPDATE punish SET Prova = '" + provaa + "' WHERE id=" + editando.get(p.getName()) + ";");
+					s.execute("UPDATE punish SET Prova = '" + provaa.get(p) + "' WHERE id=" + editando.get(p.getName()) + ";");
 				}
 				if (seve.get(p).intValue() != 0) {
 					s.execute("UPDATE punish SET" + sev + fim + " WHERE id=" + editando.get(p.getName()) + ";");
@@ -1867,7 +1864,7 @@ public class MainPunish implements Listener {
 			if (dia >= 1) {
 				return dia + " day(s) remaining(s)";
 			}
-			if (hora >= 1) {
+			if (hora > 2) {
 				return hora + " hour(s) remaining(s)";
 			}
 			if (min >= 1) {
@@ -1880,7 +1877,7 @@ public class MainPunish implements Listener {
 			if (dia >= 1) {
 				return dia + " dia(s) restante(s)";
 			}
-			if (hora >= 1) {
+			if (hora > 2) {
 				return hora + " hora(s) restante(s)";
 			}
 			if (min >= 1) {
@@ -2156,11 +2153,13 @@ public class MainPunish implements Listener {
 		}
 		try {
 			Statement s = Main.c.createStatement();
-			ResultSet res = s.executeQuery("SELECT Sev FROM punish WHERE Nome='" + punished + "' AND Sigla = '"
-					+ sigl.toUpperCase() + "' AND Cancelado = 0 ORDER BY id DESC;");
+			ResultSet res = s.executeQuery("SELECT * FROM punish WHERE Nome='" + punished + "' AND Sigla = '"
+					+ sigl.toUpperCase() + "' ORDER BY id DESC;");
 			if (res.next()) {
-				int sev2 = res.getInt("Sev");
-				return sev2 + 1;
+				if((res.getBoolean("Cancelado") && (res.getString("CancelBy") != null && res.getString("CancelBy").equalsIgnoreCase("Sistema"))) || !res.getBoolean("Cancelado")) {
+					int sev2 = res.getInt("Sev");
+					return (sev2 + 1 <= 10 ? sev2+1:10);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
