@@ -1195,6 +1195,9 @@ public class MainPunish implements Listener {
 	public void click(InventoryClickEvent e) throws SQLException {
 		Player p = (Player) e.getWhoClicked();
 		if (p instanceof Player) {
+			if(e.getCurrentItem() == null) {
+				return;
+			}
 			if (e.getCurrentItem().getTypeId() == 397 && punish.containsKey(p.getName()) && e.getCurrentItem().getItemMeta().getDisplayName().startsWith("§4")) {
 				e.setCancelled(true);
 				return;
@@ -1646,7 +1649,7 @@ public class MainPunish implements Listener {
 			}
 			if (e.getCurrentItem().isSimilar(conf)) {
 				e.setCancelled(true);
-				if (provaa.get(p).equalsIgnoreCase("") || provaa.get(p) == null) {
+				if (provaa.get(p).equalsIgnoreCase("") || provaa.get(p) == null || !provaa.containsKey(p)) {
 					if (!flagra) {
 						if (Main.english) {
 							p.sendMessage(ChatColor.DARK_RED + "Punish> " + ChatColor.RED
